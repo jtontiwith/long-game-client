@@ -1,5 +1,12 @@
 language: node_js
 node_js: node
 cache:
-   directories:
-     - node_modules
+  directories:
+  - node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: V5YeXiswwMTaFcwxOWjUAcqUAQbcVR2v04Rplz0LcaYYBF2vSWw9dF82otmb0th5tW00w3e4sLG2XNnqhNu0hVbWFx0etTSA2lEZ6jm/oFlsBkrb+3x2UAjnXQG/AY+asqtTVKefKCxfB0PFx6pG3AJwXIcK8jNWUWcDjzLq68WehIOBvWcS9PB999S7oVHybvUOSoEMJ4catN6Ho4C1cVjnTF53XhgzKQm6W+yFpLbuzR5w2exU6qrIJNC9Nkg2jtkeoca2kLorjagTm02Bcx2K/8DcjdC68HoPK2FPJNPh+LaEOw1p1HMjVgDi2MKB9APExYYxWboJL3OEUxAXBvyDTastwyaL8BIQqPJ4r9tjdN5mmVsA+7Su9ue0zxzmvXFFTqu+UtOCDIB2vc9bdhcu/v2e7etAWEJR3FZ5IjevdVvUoDcWkCEcE+lVF4OYAe5U+GUnq8keK+PMnHM4ds6QaQEHejx5vyZEZXnFVNuID62M1FE3S6ILrHbHCZwnN8PW13Vf7nLQ93f8c+rG2Md3OOHEYvOefOEYdAHCuHUN9eJt8lvxz+oT0fnr5H0KnI7EQmkCjDQy52opcU34Ge0oAb0BHx1zp5UQcz7BVfhruX6EsqnuD8zwjS9yL/NmRVhBViuknMsMq6ZA81p5ZR4YrAW/gSFi+8SzlSBbhG8=
+  app: mighty-citadel-80893
+  on:
+    repo: jtontiwith/long-game-client
