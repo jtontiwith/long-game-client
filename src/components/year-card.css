@@ -1,0 +1,9 @@
+.outcome {
+  font-size: 9px;
+  width: 60px;
+  text-align: left;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: #FFF;
+}
