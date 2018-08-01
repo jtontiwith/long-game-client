@@ -1,18 +1,22 @@
 import React from 'react';
 import './timelines.css'
 import Years from './years';
+import Year from './year';
+import Month from './month';
+import Week from './week';
+import Today from './today';
 
 export default class Timelines extends React.Component {
   render() {
-    /*
-    const arr = [];
-    this.props.outcomes.forEach(outcome => {
-      arr.push(outcome.whatText)
-    })*/
+    
     return (
      <div>
-      <Years dates={this.props.dates} outcomes={this.props.outcomes} />
-     </div>
+      <Years outcomes={this.props.outcomes} />
+      <Year outcomes={this.props.outcomes} />
+      <Month outcomes={this.props.outcomes} />
+      <Week outcomes={this.props.outcomes} />
+      <Today outcomes={this.props.outcomes} />
+    </div>
     );  
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './years.css';
-import Year from './year'
+import YearCard from './year-card';
 
 /*
 DONE-I want to generate 5 year components based on the 5 dates
@@ -20,66 +20,43 @@ with all the outcome objects across the whole 5 years
 
 export default class Years extends React.Component {
   render() {
-    console.log(this.props.outcomes[0].date)
     
-    /*for(let i = 0; i < this.props.outcomes; i++) {
-      console.log(this.props.outcomes[i].date)
-    }*/
-
-    /*
-    I have one array that's always 
-    const fiveYears = []
+    //const top = '100px'; //hardcoding for top positioning
+     /* the calc for positioning */
+    //5 year start
+    const fiveYearStart = new Date();
+    //5 year end
+    const fiveYearEnd = new Date(new Date().setFullYear(new Date().getFullYear() + 5))
+    // number of days in between 
+    const fiveYearPeriod = Math.floor((fiveYearEnd - fiveYearStart) / 86400000);
+    //pixel width I have to work with (crossbrowswer)
+    const width1 = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     
-    console.log(this.props.dates);
-    console.log(this.props.outcomes);
-
-    const fiveDates = []
-    this.props.dates.forEach(date => fiveDates.push(date));
-    console.log(fiveDates);
-
- this.props.dates.forEach((date, index) => {
-     return fiveYears.push(<Year outcomes={this.props.outcomes} yearEnd={date} key={index} />);
-    });
-    */
-
-   const fiveYears = []
-
-
-
-
-
-   this.props.dates.forEach((date, index) => {
-    return fiveYears.push(<Year outcomes={this.props.outcomes} yearEnd={date} key={index} />);
-   });
-
-   
-
-
-
-    /*
-    //it's just a simple if statement I think
-    this.props.dates.forEach((date, index) => {
-      this.props.outcomes.forEach(outcome => {
-        if(outcome.date < date) {
-          fiveYears.push(<Year outcomes={outcome} yearEnd={date} key={index} />);
-        }
-      })
-      //fiveYears.push(<Year outcomes={this.props.outcomes} yearEnd={date} key={index} />);
-    
-    })*/
-    
-    /*
-    this.props.outcomes.filter(outcome => {
-    return outcome.date < date
-    });
-    */
+    const allOutcomes = this.props.outcomes
+      .filter(outcome => outcome.range == 1825)
+      .map((outcome, index) => {
+      //find # of days until the outcome is to be reached
+      const daysUntilOutcome1 = Math.abs((outcome.date - fiveYearStart) / 86400000);
+      console.log(outcome.date);
+      console.log(fiveYearStart);
+      console.log(daysUntilOutcome1);
+      //make a fraction to multiply the detected pixel count by
+      const pixelFinderFractionX1 = daysUntilOutcome1/fiveYearPeriod;
+      //get the x-axis positioning by multiplying the number of available
+      //pixels by the fraction topp={top}
+      const leftPositioning1 = Math.round(width1 * pixelFinderFractionX1);
+      console.log(leftPositioning1);
      
+      return <YearCard leftp={leftPositioning1}  outcomeInfo={outcome} key={index} />
+    });
+
+    console.log(allOutcomes);
 
     return (
-      <div>
-        {fiveYears}
-      </div>
-    
+    <div className="five-year-parent">
+      <h2 className="five-year-header">Next 5 Years</h2>
+      <div>{allOutcomes}</div>
+    </div>
     );  
   }
 }

@@ -1,11 +1,10 @@
-.one-year-header {
+.week-header {
   position: absolute;
-  /*top: 250px;*/
   margin: 0px;
   left: 40%;
 }
 
-.one-year-parent {
+.one-week-parent {
   position: relative;
   height: 100px;
   margin-bottom: 50px;

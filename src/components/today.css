@@ -1,12 +1,15 @@
-.one-year-header {
+.today-header {
   position: absolute;
-  /*top: 250px;*/
   margin: 0px;
   left: 40%;
 }
 
-.one-year-parent {
+.today-parent {
   position: relative;
   height: 100px;
   margin-bottom: 50px;
+}
+
+ul li {
+  position: static !important;
 }
