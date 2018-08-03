@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
 import './index.css';
+import store from './store';
 import Board from './components/board';
+import App from './components/app'
 
-
+/*
 //generating some future date
 let futureDate1 = new Date(new Date().setDate(new Date().getDate() + 5)); 
 let futureDate2 = new Date(new Date().setDate(new Date().getDate() + 175));
@@ -79,8 +82,15 @@ const OUTCOMES = [
     showDetail: false 
   }
 ]
+*/
 
 
+//ReactDOM.render(<Board outcomes={OUTCOMES} />, document.getElementById('root'));
+//<App outcomes={OUTCOMES} />
+//<Board />
 
-ReactDOM.render(<Board outcomes={OUTCOMES} />, document.getElementById('root'));
-
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root')
+);

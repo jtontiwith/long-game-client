@@ -31,9 +31,10 @@ export default class Years extends React.Component {
     const fiveYearPeriod = Math.floor((fiveYearEnd - fiveYearStart) / 86400000);
     //pixel width I have to work with (crossbrowswer)
     const width1 = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    console.log(this.props.outcomes);
     
     const allOutcomes = this.props.outcomes
-      .filter(outcome => outcome.range == 1825)
+      .filter(outcome => outcome.range === 1825)
       .map((outcome, index) => {
       //find # of days until the outcome is to be reached
       const daysUntilOutcome1 = Math.abs((outcome.date - fiveYearStart) / 86400000);
@@ -51,7 +52,7 @@ export default class Years extends React.Component {
     });
 
     console.log(allOutcomes);
-
+    
     return (
     <div className="five-year-parent">
       <h2 className="five-year-header">Next 5 Years</h2>
