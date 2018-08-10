@@ -4,23 +4,22 @@ import './year-card.css';
 export default class YearCard extends React.Component {
   
   render() {
-    console.log(this.props)
     
-    console.log(`${this.props.leftp} biiotch`)
-    
-    
-
     let styles = {
       position: 'absolute',
-      //top: this.props.outcomeInfo.top,
       top: this.props.topp,
       left: this.props.leftp
-      //left: this.props.outcomeInfo.left 
     }
-
+    //console.log(this.props.outcomeInfo);
     return (
-      <article style={styles} className="outcome">
-        {this.props.outcomeInfo.whatText}
+      <article id={this.props.outcomeInfo.id} onClick={(e) => this.props.outcomeGrabber(e)} style={styles} className="outcome">
+        <dl>
+          <dt>What Outcome</dt>
+          <dd>{this.props.outcomeInfo.whatText}</dd>
+          <dt>Why</dt>
+          <dd>{this.props.outcomeInfo.whyText}</dd>
+        </dl>
+        <time dateTime={this.props.outcomeInfo.date}></time>
       </article> 
     );  
   }

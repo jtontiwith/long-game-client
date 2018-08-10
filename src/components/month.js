@@ -10,9 +10,9 @@ export default class Month extends React.Component {
     const start = new Date();
     //one month end
     const monthEnd = new Date(new Date().setMonth(new Date().getMonth() + 1));
-    console.log(`star ${start} and monthedn ${monthEnd}`)
+    //console.log(`star ${start} and monthedn ${monthEnd}`)
     // number of days in between 
-    const oneMonthPeriod = Math.floor((monthEnd - start) / 86400000);
+    const oneMonthPeriod = Math.round(Math.abs((monthEnd - start) / 86400000));
     //pixel width I have to work with (crossbrowswer)
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
@@ -22,20 +22,20 @@ export default class Month extends React.Component {
       .filter(outcome => outcome.date < monthEnd && outcome.range >= 30)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
-        const daysUntilOutcome = Math.abs((outcome.date - start) / 86400000);
-        console.log(outcome.date)
-        console.log(start);
-        console.log(daysUntilOutcome);
+        const daysUntilOutcome = Math.round(Math.abs((outcome.date - start) / 86400000));
+        //console.log(`this is the unmodified date ${outcome.date}`);
+        //console.log(`this is the start date ${start}`);
+        //console.log(`this is the number of days until the outcome ${daysUntilOutcome}`);
         //make a fraction to multiply the detected pixel count by
         const pixelFinderFractionX = daysUntilOutcome/oneMonthPeriod;
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
-        console.log(leftPositioning);
+        //console.log(`this is how many pix it should be from the left ${leftPositioning}`);
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
       });
 
-      console.log(oneMonthOutcomes);
+      //console.log(`The outcome for the MONTH ${oneMonthOutcomes}`);
 
     return(
       <div className="one-month-parent">

@@ -19,8 +19,26 @@ with all the outcome objects across the whole 5 years
 */
 
 export default class Years extends React.Component {
+  /*
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0
+    }
+    this.updateCounter = this.updateCounter.bind(this);
+  }  
+  
+  updateCounter() {
+    this.setState({
+      counter: this.state.counter + 1
+    })
+  }
+  
+  triggerCounter={this.updateCounter} <-this goes in the component
+  */
+
   render() {
-    
+    //console.log(this.state.counter)
     //const top = '100px'; //hardcoding for top positioning
      /* the calc for positioning */
     //5 year start
@@ -31,27 +49,30 @@ export default class Years extends React.Component {
     const fiveYearPeriod = Math.floor((fiveYearEnd - fiveYearStart) / 86400000);
     //pixel width I have to work with (crossbrowswer)
     const width1 = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    console.log(this.props.outcomes);
-    
+  
+   
+
+
     const allOutcomes = this.props.outcomes
       .filter(outcome => outcome.range === 1825)
       .map((outcome, index) => {
       //find # of days until the outcome is to be reached
-      const daysUntilOutcome1 = Math.abs((outcome.date - fiveYearStart) / 86400000);
-      console.log(outcome.date);
-      console.log(fiveYearStart);
-      console.log(daysUntilOutcome1);
+      let freshDate = new Date(outcome.date);
+      const daysUntilOutcome1 = Math.round(Math.abs((freshDate - fiveYearStart) / 86400000));
+      //console.log(freshDate);
+      //console.log(outcome.date);
+      //console.log(fiveYearStart);
+      //console.log(daysUntilOutcome1);
       //make a fraction to multiply the detected pixel count by
       const pixelFinderFractionX1 = daysUntilOutcome1/fiveYearPeriod;
       //get the x-axis positioning by multiplying the number of available
       //pixels by the fraction topp={top}
       const leftPositioning1 = Math.round(width1 * pixelFinderFractionX1);
-      console.log(leftPositioning1);
-     
-      return <YearCard leftp={leftPositioning1}  outcomeInfo={outcome} key={index} />
+      //console.log(leftPositioning1);
+      return <YearCard leftp={leftPositioning1} outcomeInfo={outcome} outcomeGrabber={this.props.outcomeGrabber} key={index} />
     });
 
-    console.log(allOutcomes);
+    //console.log(`Outcomes for the 5YEAR ${allOutcomes}`);
     
     return (
     <div className="five-year-parent">

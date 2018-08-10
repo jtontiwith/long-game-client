@@ -18,25 +18,22 @@ export default class Year extends React.Component {
 
     //here we are setting a pho year-end date
     let yearEnd = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-    console.log(yearEnd);
-    console.log(this.props.outcomes[0].date);
+    //console.log(this.props.outcomes[0].date);
     //here we are filter out the outcomes that don't fall by the end of
     //the year
     const oneYearOutcomes = this.props.outcomes
       .filter(outcome => outcome.date < yearEnd && outcome.range >= 365)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
-        const daysUntilOutcome = Math.abs((outcome.date - start) / 86400000);
+        let freshDate = new Date(outcome.date);
+        const daysUntilOutcome = Math.round(Math.abs((freshDate - start) / 86400000));
         //make a fraction to multiply the detected pixel count by
         const pixelFinderFractionX = daysUntilOutcome/oneYearPeriod;
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
-        console.log(leftPositioning);
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
     });
-    
-    console.log(oneYearOutcomes);
 
     return (
       <div className="one-year-parent">

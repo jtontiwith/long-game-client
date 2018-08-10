@@ -1,10 +1,23 @@
 .outcome {
   font-size: 9px;
-  width: 60px;
+  width: 50px;
   text-align: left;
   border: 1px solid black;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 3px;
   background-color: #FFF;
   bottom: 0;
 }
+
+dl {
+  margin: 0;
+}
+
+dd {
+  margin: 0;
+}
+
+dt {
+  display: none;
+}
+

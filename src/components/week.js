@@ -10,7 +10,7 @@ export default class Week extends React.Component {
     const start = new Date();
     //one week end
     const weekEnd = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7);
-    console.log(`star ${start} and monthedn ${weekEnd}`)
+    //console.log(`star ${start} and monthedn ${weekEnd}`)
     // number of days in between 
     const oneWeekPeriod = Math.floor((weekEnd - start) / 86400000);
     //pixel width I have to work with (crossbrowswer)
@@ -28,11 +28,11 @@ export default class Week extends React.Component {
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
-        console.log(leftPositioning);
+        //console.log(leftPositioning);
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
       });
 
-      console.log(oneWeekOutcomes);
+      //console.log(oneWeekOutcomes);
 
     return(
       <div className="one-week-parent">

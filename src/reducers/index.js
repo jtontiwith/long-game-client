@@ -8,7 +8,7 @@ let futureDate5 = new Date(new Date().setDate(new Date().getDate() + 25));
 let futureDate6 = new Date(new Date().setDate(new Date().getDate() + 600));
 let futureDate7 = new Date(new Date().setDate(new Date().getDate() + 0));
 
-
+//I was returning an array beofre not an object with a property of outcomes and an array as it's value
 const initialState = {
   outcomes: [
     {
@@ -67,7 +67,7 @@ const initialState = {
     },
     {
       id: 7,
-      whatText: 'Pick up drycleaning',
+      whatText: 'Pick u drycleaning',
       whyText: 'get your clothes', 
       date: futureDate7,
       range: 1,
@@ -91,5 +91,11 @@ export const reducer = (state=initialState, action) => {
         }]
     });
   }
+  else if (action.type === actions.FETCH_BOARD_SUCCESS) {
+    console.log(action);
+    return {outcomes: action.outcomes}
+  }
   return state;
 };
+
+//action.outcomes is what exposes the payload
