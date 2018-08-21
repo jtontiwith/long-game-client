@@ -9,5 +9,18 @@
 .five-year-parent {
   position: relative;
   height: 100px;
-  margin-bottom: 50px;
+  /*margin-bottom: 50px;*/
+  padding-top: 80px;
 }
+
+
+/*
+I want the user to clearly know what time period they are in 
+So I think I will just change the color of the section on scroll
+and when that color changes the range will change
+and I will do it using the offset thing
+
+
+
+
+*/

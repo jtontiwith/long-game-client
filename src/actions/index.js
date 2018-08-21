@@ -1,7 +1,8 @@
+import {normalizeResponseErrors} from './utils';
 import {API_BASE_URL} from '../config';
-
-
 console.log(API_BASE_URL);
+
+
 
 export const ADD_OUTCOME = 'ADD_OUTCOME';
 export const addOutcome = (whatText, whyText, date, range) => ({
@@ -12,7 +13,42 @@ export const addOutcome = (whatText, whyText, date, range) => ({
   range
 });
 
+export const GET_RANGE = 'GET_RANGE';
+export const getRange = (yRange, rangeCss) => {
+  console.log(`YS ACTIONS ${yRange}`)
+  return {
+    type: GET_RANGE,
+    yRange: yRange,
+    rangeCss: rangeCss
+  };
+} 
+
+//here we are just grabbing a single outcome from the DOM (not DB) so
+//that we can populate the OutcomeForm with it's values and then update
+//it, the logic of parsing the element is in the OutcomeForm itself
+export const GET_OUTCOME = 'GET_OUTCOME';
+export const getOutcome = (outcome) => {
+  console.log('Here is your outcome:' + outcome)
+  return {
+    type: GET_OUTCOME,
+    outcome
+  }
+}
+
+
+
+
 /*
+
+export const GET_RANGE = 'GET_RANGE';
+export const getRange = (yRange) => {
+  console.log(yRange)
+  return {
+    type: GET_RANGE,
+    yRange
+  };
+} 
+
 
 fetch(url, {
   method: 'POST', // or 'PUT'
@@ -36,7 +72,7 @@ export const deleteOutcome = (selectedId) => dispatch => {
     if(!res.ok) {
       return Promise.reject(res.statusText);
     }
-    return res.json();
+    //return res.json();
   }).then(res => dispatch(fetchBoard()));
 };
 
@@ -97,6 +133,28 @@ export const fetchBoardSuccess = outcomes => ({
     
 });
 
+export const fetchBoard = () => (dispatch, getState) => {
+  const authToken = getState().auth.authToken;
+  console.log(localStorage)
+  return fetch(`${API_BASE_URL}/outcomes`, {
+    method: 'GET',
+    headers: {
+      //send the auth token over the wire
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json()) //here I specify the format of the response
+    .then(outcomes => {
+      console.log(outcomes.outcomesModels);
+      dispatch(fetchBoardSuccess(outcomes.outcomesModels));
+    });
+};
+
+
+/*
+old working version
+
 export const fetchBoard = () => dispatch => {
   fetch(`${API_BASE_URL}/outcomes`).then(res => {
     if(!res.ok) {
@@ -112,3 +170,5 @@ export const fetchBoard = () => dispatch => {
 
 
 
+
+*/

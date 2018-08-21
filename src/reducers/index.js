@@ -1,6 +1,7 @@
 import * as actions from "../actions";
 
-let futureDate1 = new Date(new Date().setDate(new Date().getDate() + 5)); 
+
+let futureDate1 = new Date(new Date().setDate(new Date().getDate() + 45)); 
 let futureDate2 = new Date(new Date().setDate(new Date().getDate() + 175));
 let futureDate3 = new Date(new Date().setDate(new Date().getDate() + 1300));
 let futureDate4 = new Date(new Date().setDate(new Date().getDate() + 0));
@@ -13,10 +14,10 @@ const initialState = {
   outcomes: [
     {
       id: 1,
-      whatText: 'finish thinkful',
+      whatText: '98 time to set it straight',
       whyText: 'so I can get a good job and create value for myself and others',
       date: futureDate1,
-      range: 1825,
+      range: 30,
       editing: false,
       showDetail: false
     },
@@ -93,9 +94,27 @@ export const reducer = (state=initialState, action) => {
   }
   else if (action.type === actions.FETCH_BOARD_SUCCESS) {
     console.log(action);
-    return {outcomes: action.outcomes}
+    return Object.assign({}, state, {outcomes: action.outcomes}) 
+  } 
+  else if (action.type === actions.GET_RANGE) {
+    console.log('does this fire?')
+    return Object.assign({}, state, {range: action.yRange})
+  } else if (action.type === actions.GET_OUTCOME) {
+    console.log('the GET_OUTCOME in the reducer firing boyeee')
+    return Object.assign({}, state, {outcome: action.outcome})
   }
   return state;
 };
 
+
+
+
+
 //action.outcomes is what exposes the payload
+
+/*
+{whatText: '4 months in NY!',
+whyText: 'have fun in NY', 
+date: {Sun Nov 25 2018 00:00:00 GMT-0500 (Colombia Standard Time)},
+range: 1825}
+*/

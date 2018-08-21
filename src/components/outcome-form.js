@@ -1,8 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import './outcome-form.css';
+import {deleteOutcome, updateOutcome, postOutcome} from "../actions";
 
-export default class OutcomeForm extends React.Component {
-  
+export class OutcomeForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,33 +22,36 @@ export default class OutcomeForm extends React.Component {
     });
   }
 
+
+
   onSubmit(event) {
     event.preventDefault();
     const whatText = this.whatTextInput.value.trim();
     const whyText = this.whyTextInput.value.trim();
     const outcomeDate = new Date(this.outcomeDate.value.replace(/-/g, '\/')); 
-    const range = 1825;
-    console.log(event.currentTarget.childNodes[3].className);
-    if(event.currentTarget.childNodes[3].className === 'update-button') {
+    const range = this.props.range;
+    //console.log(event.currentTarget.childNodes[3].className);
+    //console.log(event.currentTarget.lastChild.className)
+    if(event.currentTarget.className === 'update-delete-form') {
       //here we are updateing an existing outcome
       const selectedId = this.props.selectedOutcome.getAttribute('id');
-      this.props.onUpdate(whatText, whyText, outcomeDate, range, selectedId)
-      console.log(selectedId);
+      this.props.dispatch(updateOutcome(whatText, whyText, outcomeDate, range, selectedId));
       //here we are posting and outcome for the first time
-    } else if (event.currentTarget.className === 'add-form') {
-      this.props.onAdd(whatText, whyText, outcomeDate, range)
-    } else if (event.currentTarget.lastChild.className === 'delete-button') {
-      console.log('delte started running from console')
-      const selectedId = this.props.selectedOutcome.getAttribute('id');
-      this.props.onDelete(selectedId);
-      
-    }
-    console.log(`Here's the whatText ${whatText} and whyText ${whyText} and the date ${outcomeDate}`);
+    } else if (event.currentTarget.className === 'add-form') { 
+      this.props.dispatch(postOutcome(whatText, whyText, outcomeDate, range));
+    } 
+    //console.log(`Here's the whatText ${whatText} and whyText ${whyText} and the date ${outcomeDate}`);
     this.whatTextInput.value = '';
     this.whyTextInput.value = '';
   }
 
- //ha
+  handleDelete(event) {
+    event.preventDefault();
+    const selectedId = this.props.selectedOutcome.getAttribute('id');
+    this.props.dispatch(deleteOutcome(selectedId))
+    this.whatTextInput.value = '';
+    this.whyTextInput.value = '';
+  }
   
   render() {
     
@@ -67,7 +71,7 @@ export default class OutcomeForm extends React.Component {
           <button type="button" onClick={() => this.setEditing(false)}>
             Cancel
           </button>
-          <button className="delete-button">Delete</button>
+          <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
         </form>
       )
     }
@@ -99,7 +103,7 @@ export default class OutcomeForm extends React.Component {
   }    
 }
 
-
+export default connect()(OutcomeForm);
 /*
 
 <button>Delete</button>

@@ -9,3 +9,7 @@
   height: 100px;
   margin-bottom: 50px;
 }
+
+.time-highlight {
+  background-color:#f9f4f4 !important;
+}

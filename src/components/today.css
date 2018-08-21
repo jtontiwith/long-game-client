@@ -6,9 +6,10 @@
 
 .today-parent {
   position: relative;
-  height: 100px;
+  height: 350px;
   margin-bottom: 50px;
 }
+
 
 ul li {
   position: static !important;

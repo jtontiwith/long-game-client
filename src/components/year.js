@@ -4,6 +4,44 @@ import YearCard from './year-card';
 
 
 export default class Year extends React.Component {
+  /*
+  constructor(props) {
+    super(props);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.state = {
+      styles: {}
+    }
+  }
+  
+  //
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  };
+  
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  };
+  
+  handleScroll(event) {
+    //console.log('the scroll things', event)
+    //console.log(`YEAR SCROLL: ${window.scrollY}`);
+    /*
+    if(window.scrollY >= 101 && window.scrollY <= 199) {
+      //console.log(`still inside 5 year`);
+      this.setState({
+        styles: {
+          background: '#f9f4f4'
+        },
+      })
+    } else {
+      this.setState({
+        styles: {
+          background: '#ffffff'
+        }
+      })
+    }
+  };*/
+
   render() {
     /* the calc for positioning */
     //5 year start
@@ -36,7 +74,7 @@ export default class Year extends React.Component {
     });
 
     return (
-      <div className="one-year-parent">
+      <div className={"one-year-parent " + (this.props.range === 365 ? "time-highlight" : null) }>
         <h2 className="one-year-header">This Year</h2>
         <div>{oneYearOutcomes}</div>
       </div>
@@ -55,14 +93,6 @@ as the next 12 months from that day forward, and the year section will
 only renew at the end of that 12 months instead of moving snapshot of 
 month-over-month
 -
-
-
-
-
-
-
-
-
 
 */
 

@@ -7,5 +7,9 @@
 .one-month-parent {
   position: relative;
   height: 100px;
-  margin-bottom: 50px;
+  padding: 10px;
+}
+
+.time-highlight {
+  background-color:#f9f4f4 !important;
 }

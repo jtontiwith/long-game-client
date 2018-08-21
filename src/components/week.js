@@ -29,13 +29,13 @@ export default class Week extends React.Component {
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
         //console.log(leftPositioning);
-        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
+        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} outcomeInfo={outcome} key={index} />
       });
 
       //console.log(oneWeekOutcomes);
 
     return(
-      <div className="one-week-parent">
+      <div className={"one-week-parent " + (this.props.range === 7 ? "time-highlight" : null) }>
         <h2 className="week-header">This Week</h2>
         <div>{oneWeekOutcomes}</div>
       </div>

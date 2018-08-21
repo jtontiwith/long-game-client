@@ -32,17 +32,16 @@ export default class Month extends React.Component {
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
         //console.log(`this is how many pix it should be from the left ${leftPositioning}`);
-        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
+        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} outcomeInfo={outcome} key={index} />
       });
-
+      
       //console.log(`The outcome for the MONTH ${oneMonthOutcomes}`);
 
     return(
-      <div className="one-month-parent">
+      <div className={"one-month-parent " + (this.props.range === 30 ? "time-highlight" : null) }>
         <h2 className="month-header">This Month</h2>
         <div>{oneMonthOutcomes}</div>
       </div>
-
     )
 
   }
