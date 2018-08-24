@@ -3,23 +3,6 @@ header {
   background-color: #ffffff;
   width: 100%;
   z-index: 1;
-  height: 60px;
-  padding-bottom: 12px;
+  height: 78px;
 }
 
-.time-nav {
-  list-style-type: none;
-  text-align: center;
-  padding: 0;
-}
-
-.time-nav li {
-  display: inline-block;
-  margin-right: 15px;
-  padding: 5px 10px;
-}
-
-.highlight-time-period {
-  background-color:#faf0e6;
-  border-radius: 5px;
-}

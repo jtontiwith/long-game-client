@@ -1,17 +1,30 @@
-.five-year-header {
-  position: absolute;
-  /*top: 60px;*/
-  margin: 0px;
-  left: 40%;
+.year-header {
+ text-align: center;
 }
 
 
 .five-year-parent {
   position: relative;
-  height: 100px;
+  height: 200px;
   /*margin-bottom: 50px;*/
-  padding-top: 80px;
+  padding: 85px 10px 10px 10px;
 }
+
+.end-date {
+  float: right;
+  
+}
+
+.start-date {
+  float: left;
+}
+
+.dates {
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+
 
 
 /*

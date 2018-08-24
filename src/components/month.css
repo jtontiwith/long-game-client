@@ -1,15 +1,7 @@
-.month-header {
-  position: absolute;
-  margin: 0px;
-  left: 40%;
-}
+
 
 .one-month-parent {
   position: relative;
-  height: 100px;
+  height: 200px;
   padding: 10px;
-}
-
-.time-highlight {
-  background-color:#f9f4f4 !important;
 }

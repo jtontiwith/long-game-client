@@ -15,14 +15,12 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(thunk));
 
   // Hydrate the authToken from localStorage if it exist
-const authToken = loadAuthToken();
-if (authToken) {
-    const token = authToken;
+const dataFromLocalStorage = loadAuthToken();
+if (dataFromLocalStorage) {
+    const token = dataFromLocalStorage.authToken;
+    const userId = dataFromLocalStorage.userId;
     store.dispatch(setAuthToken(token));
-    store.dispatch(refreshAuthToken());
+    store.dispatch(refreshAuthToken(userId, dataFromLocalStorage.startDate, dataFromLocalStorage.endDate));
 }
-
-//const store = createStore(reducer);
-//console.log(store.getState());
 
 export default store;

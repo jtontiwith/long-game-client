@@ -9,11 +9,12 @@ import Week from './week';
 import Today from './today';
 import requiresLogin from './requires-login';
 import {fetchBoard} from '../actions';
+import HeaderBar from './header-bar';
 
 export class Board extends React.Component {
   
 componentDidMount() {
-  this.props.dispatch(fetchBoard());
+  this.props.dispatch(fetchBoard(this.props.userId));
 }
   
   render() {
@@ -46,7 +47,9 @@ componentDidMount() {
       return Object.assign({}, outcome, {date: new Date(outcome.date)})
     });
     
+    //if range isn't set b/c user hasn't begun scrolling then set range to 1825 (i.e. the 5 year level)
     let range = this.props.range ? this.props.range : 1825;
+    
     /*
     Basically I want to detect if range is X then activate Y style in 
     the corresponding component
@@ -58,17 +61,18 @@ componentDidMount() {
 
     return (
         <div>
-          <div className="dashboard">
+          {/*<div className="dashboard">
               <div className="dashboard-username">
                   Email: {this.props.email}
               </div>
               
-          </div>
+            </div>*/}
           <header className="top-bar">
-            <OutcomeForm selectedOutcome={this.props.selectedOutcome} range={range} />
+            <HeaderBar />
+            <OutcomeForm selectedOutcome={this.props.selectedOutcome} range={range} userId={this.props.userId} />
             <nav>
               <ul className="time-nav">
-                <li className={this.props.range === 1825 ? "highlight-time-period" : null}>5 Year</li>
+                <li className={range === 1825 ? "highlight-time-period" : null}>5 Year</li>
                 <li className={this.props.range === 365 ? "highlight-time-period" : null}>This Year</li>
                 <li className={this.props.range === 30 ? "highlight-time-period" : null}>This Month</li>
                 <li className={this.props.range === 7 ? "highlight-time-period" : null}>This Week</li>
@@ -76,7 +80,7 @@ componentDidMount() {
               </ul>
             </nav>
           </header>
-          <Years range={range} outcomes={propsWithStandardDate} />
+          <Years range={range} outcomes={propsWithStandardDate} startDate={this.props.startDate} endDate={this.props.endDate} />
           <Year range={range} outcomes={propsWithStandardDate} />
           <Month range={range} outcomes={propsWithStandardDate} />
           <Week range={range} outcomes={propsWithStandardDate} />
@@ -89,12 +93,16 @@ componentDidMount() {
 
 const mapStateToProps = state => {
   const {currentUser} = state.auth;
+  console.log(state.outcomes)
   return { 
     email: state.auth.currentUser.email,
-    outcomes: state.outcomes || [],
-    range: state.range,
-    selectedOutcome: state.outcome,
-    rangeCss: state.rangeCss 
+    outcomes: state.data.outcomes || [],
+    range: state.data.range,
+    selectedOutcome: state.data.outcome,
+    rangeCss: state.data.rangeCss,
+    userId: state.auth.userId, 
+    startDate: state.auth.startDate,
+    endDate: state.auth.endDate
     }
 };
 

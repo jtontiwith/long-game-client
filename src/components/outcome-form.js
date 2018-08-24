@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './outcome-form.css';
 import {deleteOutcome, updateOutcome, postOutcome} from "../actions";
 
+
 export class OutcomeForm extends React.Component {
   constructor(props) {
     super(props);
@@ -30,15 +31,16 @@ export class OutcomeForm extends React.Component {
     const whyText = this.whyTextInput.value.trim();
     const outcomeDate = new Date(this.outcomeDate.value.replace(/-/g, '\/')); 
     const range = this.props.range;
+    const userId = this.props.userId;
     //console.log(event.currentTarget.childNodes[3].className);
     //console.log(event.currentTarget.lastChild.className)
     if(event.currentTarget.className === 'update-delete-form') {
       //here we are updateing an existing outcome
       const selectedId = this.props.selectedOutcome.getAttribute('id');
-      this.props.dispatch(updateOutcome(whatText, whyText, outcomeDate, range, selectedId));
+      this.props.dispatch(updateOutcome(whatText, whyText, outcomeDate, range, selectedId, userId));
       //here we are posting and outcome for the first time
     } else if (event.currentTarget.className === 'add-form') { 
-      this.props.dispatch(postOutcome(whatText, whyText, outcomeDate, range));
+      this.props.dispatch(postOutcome(whatText, whyText, outcomeDate, range, userId))
     } 
     //console.log(`Here's the whatText ${whatText} and whyText ${whyText} and the date ${outcomeDate}`);
     this.whatTextInput.value = '';
@@ -47,8 +49,9 @@ export class OutcomeForm extends React.Component {
 
   handleDelete(event) {
     event.preventDefault();
+    const userId = this.props.userId;
     const selectedId = this.props.selectedOutcome.getAttribute('id');
-    this.props.dispatch(deleteOutcome(selectedId))
+    this.props.dispatch(deleteOutcome(selectedId, userId))
     this.whatTextInput.value = '';
     this.whyTextInput.value = '';
   }
@@ -68,7 +71,7 @@ export class OutcomeForm extends React.Component {
           <input type="text" ref={input => this.whyTextInput = input} aria-label={'Why?'} defaultValue={selectedWhyText} />
           <input type="date" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={selectedDate} />
           <button className="update-button">Update</button>
-          <button type="button" onClick={() => this.setEditing(false)}>
+          <button className="cancel-button" type="button" onClick={() => this.setEditing(false)}>
             Cancel
           </button>
           <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
@@ -78,8 +81,7 @@ export class OutcomeForm extends React.Component {
 
     if(!this.state.editing) {
       return (
-        <div className="add-button"
-          onClick={() => this.setEditing(true)}>
+        <div className="add-button" onClick={() => this.setEditing(true)}>
           <a className="show-form-link" href="#">Add Outcome</a>
         </div>
       );
@@ -89,11 +91,11 @@ export class OutcomeForm extends React.Component {
       let dateToday = new Date().toISOString().substr(0,10); 
       return (
         <form className="add-form" onSubmit={this.onSubmit}>   
-          <input type="text" ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} placeholder={`What's your outcome?`}/>
-          <input type="text" ref={input => this.whyTextInput = input} aria-label={'Why?'} placeholder={`Why?`} />
-          <input type="date" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={dateToday} />
-          <button>Add</button>
-          <button type="button" onClick={() => this.setEditing(false)}>
+          <input type="text" className="what-input"  ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} placeholder={`What's your outcome?`}/>
+          <input type="text" className="why-input" ref={input => this.whyTextInput = input} aria-label={'Why?'} placeholder={`Why?`} />
+          <input type="date" className="date-input" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={dateToday} />
+          <button className="add-outcome-button">Add</button>
+          <button className="cancel-button" type="button" onClick={() => this.setEditing(false)}>
             Cancel
           </button>
         </form>

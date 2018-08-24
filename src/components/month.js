@@ -7,22 +7,25 @@ export default class Month extends React.Component {
   render() {
     /* the calc for positioning */
     //5 year start
-    const start = new Date();
+    //const start = new Date();
+    const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
     //one month end
-    const monthEnd = new Date(new Date().setMonth(new Date().getMonth() + 1));
-    //console.log(`star ${start} and monthedn ${monthEnd}`)
+    //const lastDayOfMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+    const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+    //console.log(`star ${start} and monthedn ${lastDayOfMonth}`)
     // number of days in between 
-    const oneMonthPeriod = Math.round(Math.abs((monthEnd - start) / 86400000));
+    const oneMonthPeriod = Math.round(Math.abs((lastDayOfMonth - firstDayOfMonth) / 86400000));
+    console.log(oneMonthPeriod);
     //pixel width I have to work with (crossbrowswer)
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
     //here we are filter out the outcomes that don't fall by the end of
     //the year
     const oneMonthOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date < monthEnd && outcome.range >= 30)
+      .filter(outcome => outcome.date < lastDayOfMonth && outcome.range >= 30)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
-        const daysUntilOutcome = Math.round(Math.abs((outcome.date - start) / 86400000));
+        const daysUntilOutcome = Math.round(Math.abs((outcome.date - firstDayOfMonth) / 86400000));
         //console.log(`this is the unmodified date ${outcome.date}`);
         //console.log(`this is the start date ${start}`);
         //console.log(`this is the number of days until the outcome ${daysUntilOutcome}`);
@@ -36,10 +39,18 @@ export default class Month extends React.Component {
       });
       
       //console.log(`The outcome for the MONTH ${oneMonthOutcomes}`);
-
+      let startAndEndDates;
+      if(this.props.range === 30) {
+        startAndEndDates = <div>
+          <span className="dates start-date">{firstDayOfMonth.toDateString().slice(3)}</span>
+          <span className="dates end-date">{lastDayOfMonth.toDateString().slice(3)}</span>    
+          </div>
+      }  
+      
     return(
       <div className={"one-month-parent " + (this.props.range === 30 ? "time-highlight" : null) }>
-        <h2 className="month-header">This Month</h2>
+        {startAndEndDates}   
+        <h2 className="year-header">This Month</h2>
         <div>{oneMonthOutcomes}</div>
       </div>
     )

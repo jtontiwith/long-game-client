@@ -1,15 +1,7 @@
-.week-header {
-  position: absolute;
-  margin: 0px;
-  left: 40%;
-}
+
 
 .one-week-parent {
   position: relative;
-  height: 100px;
-  margin-bottom: 50px;
-}
-
-.time-highlight {
-  background-color:#f9f4f4 !important;
+  height: 200px;
+  padding: 10px;
 }

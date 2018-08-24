@@ -5,12 +5,13 @@ console.log(API_BASE_URL);
 
 
 export const ADD_OUTCOME = 'ADD_OUTCOME';
-export const addOutcome = (whatText, whyText, date, range) => ({
+export const addOutcome = (whatText, whyText, date, range, userId) => ({
   type: ADD_OUTCOME,
   whatText,
   whyText,
   date,
-  range
+  range,
+  userId
 });
 
 export const GET_RANGE = 'GET_RANGE';
@@ -61,7 +62,7 @@ fetch(url, {
 .then(response => console.log('Success:', response));
 */
 
-export const deleteOutcome = (selectedId) => dispatch => {
+export const deleteOutcome = (selectedId, userId) => dispatch => {
   console.log('THIS THING RUNNING?')
   fetch(`${API_BASE_URL}/outcomes/${selectedId}`, {
     method: 'DELETE',
@@ -73,11 +74,11 @@ export const deleteOutcome = (selectedId) => dispatch => {
       return Promise.reject(res.statusText);
     }
     //return res.json();
-  }).then(res => dispatch(fetchBoard()));
+  }).then(res => dispatch(fetchBoard(userId)));
 };
 
 //action to update an outcome
-export const updateOutcome = (whatText, whyText, date, range, selectedId) => dispatch => {
+export const updateOutcome = (whatText, whyText, date, range, selectedId, userId) => dispatch => {
   console.log(selectedId);
   fetch(`${API_BASE_URL}/outcomes/${selectedId}`, {
     method: 'PUT',
@@ -99,11 +100,11 @@ export const updateOutcome = (whatText, whyText, date, range, selectedId) => dis
     }
     console.log(res)
     //return res //.json()
-  }).then(res => dispatch(fetchBoard()));
+  }).then(res => dispatch(fetchBoard(userId)));
 }; 
 
 //action to post and outcome to the db
-export const postOutcome = (whatText, whyText, date, range) => dispatch => {
+export const postOutcome = (whatText, whyText, date, range, userId) => dispatch => {
   fetch(`${API_BASE_URL}/outcomes`, {
     method: 'POST',
     body: JSON.stringify({
@@ -111,7 +112,7 @@ export const postOutcome = (whatText, whyText, date, range) => dispatch => {
       whyText: whyText, 
       date: date,
       range: range,
-      user_id: '123456' 
+      user_id: userId 
     }),
     headers: {
       'Content-Type': 'application/json'
@@ -123,7 +124,7 @@ export const postOutcome = (whatText, whyText, date, range) => dispatch => {
     }
     console.log(res)
     return res.json()
-  }).then(res => dispatch(fetchBoard()));
+  }).then(res => dispatch(fetchBoard(userId)));
 }; 
 
 export const FETCH_BOARD_SUCCESS = 'FETCH_BOARD_SUCCESS';
@@ -133,10 +134,17 @@ export const fetchBoardSuccess = outcomes => ({
     
 });
 
-export const fetchBoard = () => (dispatch, getState) => {
+
+//this a function calling a function, and the inner function I am 
+//receiving dispatch so I need to pass it in so I can use it later
+//the pattern is better to pass the user_id form the component
+//to process data do that in the component, to change the state,
+//that should be in the reducer, and in the action it just making 
+//the request
+export const fetchBoard = (userId) => (dispatch, getState) => {
   const authToken = getState().auth.authToken;
-  console.log(localStorage)
-  return fetch(`${API_BASE_URL}/outcomes`, {
+  console.log(userId)
+  return fetch(`${API_BASE_URL}/outcomes/${userId}`, {
     method: 'GET',
     headers: {
       //send the auth token over the wire

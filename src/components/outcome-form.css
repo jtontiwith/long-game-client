@@ -1,5 +1,103 @@
 .show-form-link {
-  /*text-align: center;
-  display: block;*/
-  margin-left: 40%;
+  display: inline-block;
+  background-color: #2CC990;
+  border: none;
+  color: white;
+  padding: 5px 16px;
+  font-size: 16px;
+  margin-top: 4px;
+  opacity: 0.75;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.show-form-link:hover {
+  opacity: 1;
+}
+
+.add-button {
+  text-align: center;
+}
+
+.add-form {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.add-form, .add-button, .update-delete-form {
+  background-color: #f5f5f8;
+}
+
+.time-nav {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.time-nav li {
+  display: inline-block;
+  margin-right: 15px;
+  padding: 2px 9px;
+}
+
+.highlight-time-period {
+  background-color: #FF8300;
+  border-radius: 2px;
+  color: #fff;
+}
+
+.what-input, .why-input {
+  font-size: 15px;
+  border: none;
+  padding: 3px 3px 5px 11px;
+  border-bottom: 0px solid #2C82C9;
+  /*background-color: #D1D5D8;*/
+  transition: 0.3s;
+}
+
+.what-input {
+  border-radius: 4px 0 0 4px;
+}
+
+.date-input {
+  height: 18px;
+  font-size: 15px;
+  border: none;
+  padding: 4px 3px 3.5px 11px;
+  border-bottom: 0px solid #2C82C9;
+  border-radius: 0 4px 4px 0;
+  margin-right: 11px;
+}
+
+.add-outcome-button {
+  border-radius: 3px 0 0 3px;
+  padding: 6px 10px 6px 10px;
+  background-color: #2CC990;
+  color: white; 
+  border: none;
+  vertical-align: top;
+  opacity: 0.75;
+  transition: 0.3s;
+}
+
+.add-outcome-button:hover {
+  opacity: 1;
+}
+
+.cancel-button {
+  border-radius: 0 3px 3px 0;
+  padding: 6px 10px 6px 10px;
+  background-color: #3498DB;;
+  color: white; 
+  border: none;
+  vertical-align: top;
+  opacity: 0.75;
+  transition: 0.3s;
+}
+
+.cancel-button:hover {
+  opacity: 1;
 }

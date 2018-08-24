@@ -4,78 +4,41 @@ import YearCard from './year-card';
 
 
 export default class Year extends React.Component {
-  /*
-  constructor(props) {
-    super(props);
-    this.handleScroll = this.handleScroll.bind(this);
-    this.state = {
-      styles: {}
-    }
-  }
-  
-  //
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  };
-  
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  };
-  
-  handleScroll(event) {
-    //console.log('the scroll things', event)
-    //console.log(`YEAR SCROLL: ${window.scrollY}`);
-    /*
-    if(window.scrollY >= 101 && window.scrollY <= 199) {
-      //console.log(`still inside 5 year`);
-      this.setState({
-        styles: {
-          background: '#f9f4f4'
-        },
-      })
-    } else {
-      this.setState({
-        styles: {
-          background: '#ffffff'
-        }
-      })
-    }
-  };*/
-
+ 
   render() {
     /* the calc for positioning */
-    //5 year start
-    const start = new Date();
-    //1 year end
-    const end = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
+    const firstDayOfYear = new Date(new Date().getFullYear(), 0, 1);
+    const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31)
     // number of days in between 
-    const oneYearPeriod = Math.floor((end - start) / 86400000);
+    const currentYearPeriod = Math.floor((lastDayOfYear - firstDayOfYear) / 86400000)
     //pixel width I have to work with (crossbrowswer)
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-
-    //here we are setting a pho year-end date
-    let yearEnd = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
-    //console.log(this.props.outcomes[0].date);
-    //here we are filter out the outcomes that don't fall by the end of
-    //the year
+    //here we are filter out the outcomes for the year
     const oneYearOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date < yearEnd && outcome.range >= 365)
+      .filter(outcome => outcome.date < lastDayOfYear && outcome.range >= 365)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
-        let freshDate = new Date(outcome.date);
-        const daysUntilOutcome = Math.round(Math.abs((freshDate - start) / 86400000));
+        const daysUntilOutcome = Math.round(Math.abs((outcome.date - firstDayOfYear) / 86400000));
         //make a fraction to multiply the detected pixel count by
-        const pixelFinderFractionX = daysUntilOutcome/oneYearPeriod;
+        const pixelFinderFractionX = daysUntilOutcome/currentYearPeriod;
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
         const leftPositioning = Math.round(width * pixelFinderFractionX);
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
     });
 
+    let startAndEndDates;
+    if(this.props.range === 365) {
+      startAndEndDates = <div>
+        <span className="dates start-date">{firstDayOfYear.toDateString().slice(3)}</span>
+        <span className="dates end-date">{lastDayOfYear.toDateString().slice(3)}</span>    
+        </div>
+    } 
+
     return (
       <div className={"one-year-parent " + (this.props.range === 365 ? "time-highlight" : null) }>
-        <h2 className="one-year-header">This Year</h2>
+        {startAndEndDates}
+        <h2 className="year-header">This Year</h2>
         <div>{oneYearOutcomes}</div>
       </div>
     )

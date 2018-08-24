@@ -35,20 +35,20 @@ export class Years extends React.Component {
   };
   
   handleScroll(event) {
-    if(window.scrollY >= 0 && window.scrollY <= 100) {
+    if(window.scrollY >= 0 && window.scrollY <= 215) {
       const range = 1825;
       console.log(window.scrollY);
       this.props.dispatch(getRange(range)); //
-    } else if (window.scrollY >= 101 && window.scrollY <= 200) {
+    } else if (window.scrollY >= 216 && window.scrollY <= 430) {
       const range = 365;
       this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 201 && window.scrollY <= 300) {
+    } else if (window.scrollY >= 431 && window.scrollY <= 631) {
       const range = 30;
       this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 301 && window.scrollY <= 400) {
+    } else if (window.scrollY >= 632 && window.scrollY <= 832) {
       const range = 7;
       this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 401) {
+    } else if (window.scrollY >= 862) {
       const range = 1;
       this.props.dispatch(getRange(range));
     }
@@ -58,9 +58,9 @@ export class Years extends React.Component {
   
   render() {
     //5 year start
-    const fiveYearStart = new Date();
+    const fiveYearStart = new Date(this.props.startDate);
     //5 year end
-    const fiveYearEnd = new Date(new Date().setFullYear(new Date().getFullYear() + 5))
+    const fiveYearEnd = new Date(this.props.endDate)
     // number of days in between 
     const fiveYearPeriod = Math.floor((fiveYearEnd - fiveYearStart) / 86400000);
     //pixel width I have to work with (crossbrowswer)
@@ -70,12 +70,8 @@ export class Years extends React.Component {
       .filter(outcome => outcome.range === 1825)
       .map((outcome, index) => {
       //find # of days until the outcome is to be reached
-      let freshDate = new Date(outcome.date);
-      const daysUntilOutcome1 = Math.round(Math.abs((freshDate - fiveYearStart) / 86400000));
-      //console.log(freshDate);
-      //console.log(outcome.date);
-      //console.log(fiveYearStart);
-      //console.log(daysUntilOutcome1);
+      console.log(`here's the date ${outcome.date} and teh ${outcome.whatText}`)
+      const daysUntilOutcome1 = Math.round(Math.abs((outcome.date - fiveYearStart) / 86400000));
       //make a fraction to multiply the detected pixel count by
       const pixelFinderFractionX1 = daysUntilOutcome1/fiveYearPeriod;
       //get the x-axis positioning by multiplying the number of available
@@ -89,9 +85,11 @@ export class Years extends React.Component {
     
     return (
       <div className={"five-year-parent " + (this.props.range === 1825 ? "time-highlight" : null) }>
-      <h2 className="five-year-header">Next 5 Years</h2>
-      <div>{allOutcomes}</div>
-    </div>
+        <span className="dates start-date">{fiveYearStart.toDateString().slice(3)}</span>
+        <span className="dates end-date">{fiveYearEnd.toDateString().slice(3)}</span>
+        <h2 className="year-header">Next 5 Years</h2>
+        <div>{allOutcomes}</div>
+      </div>
     );  
   }
 }
@@ -127,6 +125,27 @@ component with the info (outcome objects that have a date that's
 before the end date associated with that year components date range)
 because it doesn't seem to make sense to supply every year component
 with all the outcome objects across the whole 5 years
+
+
+ handleScroll(event) {
+    if(window.scrollY >= 0 && window.scrollY <= 100) {
+      const range = 1825;
+      console.log(window.scrollY);
+      this.props.dispatch(getRange(range)); //
+    } else if (window.scrollY >= 101 && window.scrollY <= 200) {
+      const range = 365;
+      this.props.dispatch(getRange(range));
+    } else if (window.scrollY >= 201 && window.scrollY <= 300) {
+      const range = 30;
+      this.props.dispatch(getRange(range));
+    } else if (window.scrollY >= 301 && window.scrollY <= 400) {
+      const range = 7;
+      this.props.dispatch(getRange(range));
+    } else if (window.scrollY >= 401) {
+      const range = 1;
+      this.props.dispatch(getRange(range));
+    }
+  };
 
 
 

@@ -17,7 +17,7 @@ export default class Today extends React.Component {
 
     return (
       <div className={"today-parent " + (this.props.range === 1 ? "time-highlight" : null) }>
-        <h2 className="today-header">Today</h2>
+        <h2 className="year-header">Today</h2>
         <div>
           <ul>
             <li>{todayOutcomes}</li>

@@ -1,12 +1,8 @@
-.today-header {
-  position: absolute;
-  margin: 0px;
-  left: 40%;
-}
+
 
 .today-parent {
   position: relative;
-  height: 350px;
+  height: 415px;
   margin-bottom: 50px;
 }
 

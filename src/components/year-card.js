@@ -18,6 +18,7 @@ export class YearCard extends React.Component {
       top: this.props.topp,
       left: this.props.leftp
     }
+
     //console.log(this.props.outcomeInfo); onClick={(e) => this.props.outcomeGrabber(e)}
     return (
       <article id={this.props.outcomeInfo.id} onClick={(e) => this.handleClick(e)}  style={styles} className="outcome">
@@ -27,7 +28,7 @@ export class YearCard extends React.Component {
           <dt>Why</dt>
           <dd>{this.props.outcomeInfo.whyText}</dd>
         </dl>
-        <time dateTime={this.props.outcomeInfo.date}></time>
+        <time className="outcome-date" dateTime={this.props.outcomeInfo.date}>{this.props.outcomeInfo.date.toDateString()}</time>
       </article> 
     );  
   }

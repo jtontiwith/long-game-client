@@ -32,7 +32,10 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, {
           loading: false,
           currentUser: action.currentUser,
-          userId: action.userId
+          userId: action.userId,
+          startDate: action.startDate,
+          endDate: action.endDate,
+          dates: 'where are ya?'
       });
   } else if (action.type === AUTH_ERROR) {
       return Object.assign({}, state, {

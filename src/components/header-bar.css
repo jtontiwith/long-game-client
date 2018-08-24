@@ -1,0 +1,13 @@
+.logout-button {
+  border:none; 
+  padding:0!important;
+  font: inherit;
+  cursor: pointer;
+  font-size: 10px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: inherit;
+  color: #d5cec5;
+}

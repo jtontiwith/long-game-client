@@ -22,10 +22,12 @@ export const authRequest = () => ({
 });
 
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const authSuccess = (currentUser, userId) => ({
+export const authSuccess = (currentUser, userId, startDate, endDate) => ({
     type: AUTH_SUCCESS,
     currentUser,
-    userId
+    userId,
+    startDate,
+    endDate
 });
 
 export const AUTH_ERROR = 'AUTH_ERROR';
@@ -36,12 +38,12 @@ export const authError = error => ({
 
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
-const storeAuthInfo = (authToken, userId, dispatch) => {
-    console.log('does this storeAuthInfo shit run?');
+const storeAuthInfo = (authToken, userId, startDate, endDate, dispatch) => {
+    console.log(`does startDate ${startDate} and endDate ${endDate} show?`);
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
-    dispatch(authSuccess(decodedToken.user, userId));
-    saveAuthToken(authToken, userId);
+    dispatch(authSuccess(decodedToken.user, userId, startDate, endDate));
+    saveAuthToken(authToken, userId, startDate, endDate);
 };
 
 export const login = (email, password) => dispatch => {
@@ -63,7 +65,8 @@ export const login = (email, password) => dispatch => {
             //.then(res => console.log(res.json())) <-why does loggin this to the console make the rest the .then chain fail
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({authToken, userId}) => storeAuthInfo(authToken, userId, dispatch))
+            .then(({authToken, userId, startDate, endDate}) => storeAuthInfo(authToken, userId, startDate, endDate, dispatch))
+            //.then(({authToken, userId}) => storeAuthInfo(authToken, userId, dispatch))
             .then(res => console.log('do we make it to here?'))
             .catch(err => {
                 const {code} = err;
@@ -83,9 +86,12 @@ export const login = (email, password) => dispatch => {
     );
 };
 
-export const refreshAuthToken = () => (dispatch, getState) => {
+export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
+    //const startDateFromStore = getState().auth.startDate;
+    //const endDateFromStore = getState().auth.endDate;
+    //console.log(`start ${startDateFromStore} and end ${endDateFromStore}`)
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -95,7 +101,8 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        //.then(res => console.log(res.json()))
+        .then(({authToken}) => storeAuthInfo(authToken, userId, startDate, endDate, dispatch))
         .catch(err => {
             // We couldn't get a refresh token because our current credentials
             // are invalid or expired, or something else went wrong, so clear

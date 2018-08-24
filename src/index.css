@@ -1,6 +1,39 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   box-sizing: border-box;
+  background-color: #fffff2;
 }
+
+.top-bar {
+  background-color: #f5f5f8; 
+}
+
+.time-highlight {
+  /*background-color: #d5cec5 !important;*/
+  /*border-bottom: 3px solid rgb(211, 235, 255);*/
+  background-color: #f9f9f9;
+}
+
+.dates {
+  border-bottom: 2px solid #3498DB;
+}
+
+h2 {
+  margin: 0px;
+}
+
+/* Here's the color pallet
+http://www.colourlovers.com/palette/101556/Flat
+#2C82C9 - blue
+#2CC990 - green
+#EEE657 - yellow
+#FF8300 - orange
+#FC6042 - red
+#f5f5f8 - light grey
+#d5cec5 - darker grey
+
+
+
+*/

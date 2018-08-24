@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter, Link} from 'react-router-dom';
 import Board from './board';
-//import Landing from './landing';
 import LandingPage from './landing-page';
 import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
@@ -44,21 +43,21 @@ export class App extends React.Component {
           <div className="app">
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/register" component={RegistrationPage} />
-              <Route exact path="/board/:userId" render={() => <Board />} />
-              <h3><Link to="/board/:userId">login</Link></h3>
+              <Route exact path="/board" component={Board} />
           </div>
       );
   }
 }
 
 const mapStateToProps = state => ({
-  hasAuthToken: state.auth.authToken !== null,
+  hasAuthToken: state.auth.authToken !== null, //<-it's saying it's true or false based on that conditon
   loggedIn: state.auth.currentUser !== null
 });
 
 // Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
 export default withRouter(connect(mapStateToProps)(App));
 
+//you only use the withRouter in the app component
 
 /*
 The old working one...
