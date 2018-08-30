@@ -13,15 +13,11 @@
   border-radius: 2px;
 }
 
-.show-form-link:hover {
-  opacity: 1;
-}
-
 .add-button {
   text-align: center;
 }
 
-.add-form {
+.add-form, .update-delete-form {
   text-align: center;
   margin-top: 10px;
 }
@@ -72,7 +68,7 @@
   margin-right: 11px;
 }
 
-.add-outcome-button {
+.add-outcome-button, .update-button {
   border-radius: 3px 0 0 3px;
   padding: 6px 10px 6px 10px;
   background-color: #2CC990;
@@ -83,14 +79,10 @@
   transition: 0.3s;
 }
 
-.add-outcome-button:hover {
-  opacity: 1;
-}
-
 .cancel-button {
   border-radius: 0 3px 3px 0;
   padding: 6px 10px 6px 10px;
-  background-color: #3498DB;;
+  background-color: #3498DB;
   color: white; 
   border: none;
   vertical-align: top;
@@ -98,6 +90,81 @@
   transition: 0.3s;
 }
 
-.cancel-button:hover {
+.delete-button {
+  border-radius: 0 3px 3px 0;
+  padding: 6px 10px 6px 10px;
+  background-color: #FC6042;
+  color: white; 
+  border: none;
+  vertical-align: top;
+  opacity: 0.75;
+  transition: 0.3s;
+}
+
+.cancel-btn-update-delete {
+  border-radius: 0px;
+}
+
+.add-outcome-button:hover, .update-button:hover, .cancel-button:hover, .delete-button:hover, .show-form-link:hover   {
   opacity: 1;
+}
+
+.form-buttons {
+  display: inline-block;
+  vertical-align: top;
+}
+
+
+
+
+@media only screen and (max-width: 740px) {
+  .what-input {
+    
+    
+  }
+
+  .why-input {
+   display: none;
+  }
+
+
+
+
+}
+
+@media only screen and (max-width: 547px) {
+  .what-input {
+    width: 35%;
+  }
+
+  .date-input {
+    width: 45%
+  }
+
+  .form-buttons {
+    display: block;
+    padding-top: 10px;
+  }
+
+  nav {
+    display: none;
+  }
+
+
+}
+
+
+
+
+
+@media only screen and (max-width: 474px) { 
+  .time-nav li {
+    display: inline;   
+  }
+
+  .time-nav li:nth-child(3):after { 
+    content: "\A";
+    white-space: pre; 
+  }
+
 }

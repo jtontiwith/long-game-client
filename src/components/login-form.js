@@ -9,7 +9,10 @@ export class LoginForm extends React.Component {
         return this.props.dispatch(login(values.email, values.password));
     }
 
+
+
     render() {
+        
         let error;
         if (this.props.error) {
             error = (
@@ -25,15 +28,16 @@ export class LoginForm extends React.Component {
                     this.onSubmit(values)
                 )}>
                 {error}
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email" className="hide">Email</label>
                 <Field
                     component={Input}
                     type="email"
                     name="email"
                     id="email"
-                    validate={[required, nonEmpty]}
+                    placeholder="email"
+                    validate={[required, nonEmpty]}        
                 />
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password" className="hide">Password</label>
                 <Field
                     component={Input}
                     type="password"
@@ -41,7 +45,7 @@ export class LoginForm extends React.Component {
                     id="password"
                     validate={[required, nonEmpty]}
                 />
-                <button disabled={this.props.pristine || this.props.submitting}>
+                <button className="log-reg-submit-btn" disabled={this.props.pristine || this.props.submitting}>
                     Log in
                 </button>
             </form>

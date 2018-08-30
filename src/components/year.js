@@ -13,6 +13,8 @@ export default class Year extends React.Component {
     const currentYearPeriod = Math.floor((lastDayOfYear - firstDayOfYear) / 86400000)
     //pixel width I have to work with (crossbrowswer)
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    console.log(width)
+    console.log(this.props.width)
     //here we are filter out the outcomes for the year
     const oneYearOutcomes = this.props.outcomes
       .filter(outcome => outcome.date < lastDayOfYear && outcome.range >= 365)
@@ -23,7 +25,11 @@ export default class Year extends React.Component {
         const pixelFinderFractionX = daysUntilOutcome/currentYearPeriod;
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
-        const leftPositioning = Math.round(width * pixelFinderFractionX);
+        let leftPositioning = Math.round(width * pixelFinderFractionX);
+        //hack/fix to ensure outcomes at the end of periods don't run off screen
+        if(leftPositioning >= (width - 50)) {
+          leftPositioning = width - 80;
+        }
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
     });
 

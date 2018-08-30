@@ -33,7 +33,11 @@ export default class Month extends React.Component {
         const pixelFinderFractionX = daysUntilOutcome/oneMonthPeriod;
         //get the x-axis positioning by multiplying the number of available
         //pixels by the fraction
-        const leftPositioning = Math.round(width * pixelFinderFractionX);
+        let leftPositioning = Math.round(width * pixelFinderFractionX);
+         //hack/fix to ensure outcomes at the end of periods don't run off screen
+        if(leftPositioning >= (width - 50)) {
+          leftPositioning = width - 80;
+        }
         //console.log(`this is how many pix it should be from the left ${leftPositioning}`);
         return <YearCard leftp={leftPositioning} outcomeInfo={outcome} outcomeInfo={outcome} key={index} />
       });

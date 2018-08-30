@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
+import './registration-page.css';
+
 
 import RegistrationForm from './registration-form';
 
@@ -12,9 +14,10 @@ export function RegistrationPage(props) {
   }
   return (
       <div className="home">
-          <h2>Register for LongGame</h2>
+          <h2 className="reg-h2">Register for TopView</h2>
+          <div className="byline">The easy 5 year > 1 year > 1 month > 1 week > 1 day planning app</div>
           <RegistrationForm />
-          {/*<Link to="/">Login</Link>*/}
+          <footer className="reg-login-footer"><Link to="/" className="reg-login-footer-links">Login</Link> or check out the live <a href="#" className="reg-login-footer-links">demo</a>.</footer>  
       </div>
   );
 }

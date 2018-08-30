@@ -11,3 +11,10 @@
   background-color: inherit;
   color: #d5cec5;
 }
+
+
+@media only screen and (max-width: 765px) { 
+  .logout-button {
+    top: 65px;
+  }
+}

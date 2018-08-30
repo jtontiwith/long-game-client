@@ -12,19 +12,19 @@ export default class Today extends React.Component {
     const todayOutcomes = this.props.outcomes
       .filter(outcome => outcome.date < endOfToday)
       .map((outcome, index) => {
-        return <YearCard outcomeInfo={outcome} outcomeInfo={outcome} key={index} />
+        return <li><YearCard outcomeInfo={outcome} outcomeInfo={outcome} key={index} /></li>
       })
 
     return (
       <div className={"today-parent " + (this.props.range === 1 ? "time-highlight" : null) }>
         <h2 className="year-header">Today</h2>
         <div>
-          <ul>
-            <li>{todayOutcomes}</li>
+          <ul className="today-ul">
+            {todayOutcomes}
           </ul>
         </div>
       </div>
-  )
+  );
 
   }
 

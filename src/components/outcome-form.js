@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './outcome-form.css';
-import {deleteOutcome, updateOutcome, postOutcome} from "../actions";
+import {deleteOutcome, updateOutcome, postOutcome, clearOutcome} from "../actions";
 
 
 export class OutcomeForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);  
     this.state = {
       editing: false
     }
@@ -14,13 +14,17 @@ export class OutcomeForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this); //what does this do
     //binding, making sure this is going to be this, and not 
     //we are preserving the scope 
-    
+    console.log(this.state);
   }
   
-  setEditing(editing) {
+  setEditing(editing, e) {
+    e.preventDefault();
     this.setState({
       editing
     });
+    //dispatch an action to clear the selectedOutcome or set it to false
+    this.props.dispatch(clearOutcome());
+    console.log(this.state.editing)
   }
 
 
@@ -57,7 +61,29 @@ export class OutcomeForm extends React.Component {
   }
   
   render() {
+    /*if(this.props.selectedOutcome) {
+      this.state = {
+        editing: false
+      }
+      
+    }  
+    this is probably all happening b/c I am not using redux
     
+    What's the problem?
+    The cancel button on the update-delete-form doesn't work the same
+    as it does on the add-form 
+
+    Why isn't it working?
+    if there's no this.props.selectedOutcome then we return a di
+    
+    
+    
+    
+    */
+    
+    
+    
+    console.log(this.props.selectedOutcome);
     if(this.props.selectedOutcome) {
       
       let children = this.props.selectedOutcome.childNodes;
@@ -67,21 +93,24 @@ export class OutcomeForm extends React.Component {
       
       return (
         <form className="update-delete-form" onSubmit={this.onSubmit}>   
-          <input type="text" ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} defaultValue={selectedWhatText} />
-          <input type="text" ref={input => this.whyTextInput = input} aria-label={'Why?'} defaultValue={selectedWhyText} />
-          <input type="date" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={selectedDate} />
-          <button className="update-button">Update</button>
-          <button className="cancel-button" type="button" onClick={() => this.setEditing(false)}>
-            Cancel
-          </button>
-          <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
+          <input type="text" className="what-input" ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} defaultValue={selectedWhatText} />
+          <input type="text" className="why-input" ref={input => this.whyTextInput = input} aria-label={'Why?'} defaultValue={selectedWhyText} placeholder={`Why?`} />
+          <input type="date" className="date-input" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={selectedDate} />
+          <div className="form-buttons">
+            <button className="update-button">Update</button>
+            <button className="cancel-button cancel-btn-update-delete" type="button" onClick={(e) => this.setEditing(false, e)}>
+              Cancel
+            </button>
+            <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
+          </div>
         </form>
       )
+      
     }
 
     if(!this.state.editing) {
       return (
-        <div className="add-button" onClick={() => this.setEditing(true)}>
+        <div className="add-button" onClick={(e) => this.setEditing(true, e)}>
           <a className="show-form-link" href="#">Add Outcome</a>
         </div>
       );
@@ -91,13 +120,15 @@ export class OutcomeForm extends React.Component {
       let dateToday = new Date().toISOString().substr(0,10); 
       return (
         <form className="add-form" onSubmit={this.onSubmit}>   
-          <input type="text" className="what-input"  ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} placeholder={`What's your outcome?`}/>
+          <input type="text" className="what-input"  ref={input => this.whatTextInput = input} aria-label={`Outcome?`} placeholder={`Outcome?`}/>
           <input type="text" className="why-input" ref={input => this.whyTextInput = input} aria-label={'Why?'} placeholder={`Why?`} />
           <input type="date" className="date-input" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={dateToday} />
-          <button className="add-outcome-button">Add</button>
-          <button className="cancel-button" type="button" onClick={() => this.setEditing(false)}>
-            Cancel
-          </button>
+          <div className="form-buttons">
+            <button className="add-outcome-button">Add</button>
+            <button className="cancel-button" type="button" onClick={(e) => this.setEditing(false, e)}>
+              Cancel
+            </button>
+          </div>
         </form>
       );  
     } 

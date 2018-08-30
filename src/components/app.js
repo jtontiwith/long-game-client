@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter, Link} from 'react-router-dom';
+import {Provider} from 'react-redux';
 import Board from './board';
 import LandingPage from './landing-page';
 import RegistrationPage from './registration-page';
 import {refreshAuthToken} from '../actions/auth';
-
 
 
 export class App extends React.Component {
@@ -40,13 +40,14 @@ export class App extends React.Component {
 
   render() {
       return (
-          <div className="app">
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/register" component={RegistrationPage} />
-              <Route exact path="/board" component={Board} />
-          </div>
+        <div className="app">
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/register" component={RegistrationPage} />
+          <Route exact path="/board" component={Board} />
+        </div>
       );
-  }
+     //there a Provider around the Board route for testing purposes 
+   }
 }
 
 const mapStateToProps = state => ({

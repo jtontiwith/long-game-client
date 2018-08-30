@@ -100,8 +100,11 @@ export const reducer = (state=initialState, action) => {
     console.log('does this fire?')
     return Object.assign({}, state, {range: action.yRange})
   } else if (action.type === actions.GET_OUTCOME) {
-    console.log('the GET_OUTCOME in the reducer firing boyeee')
     return Object.assign({}, state, {outcome: action.outcome})
+  } else if (action.type === actions.CLEAR_OUTCOME) {
+    return Object.assign({}, state, {outcome: undefined})
+  } else if (action.type === actions.SCREEN_WIDTH) {
+    return Object.assign({}, state, {screenWidthStore: action.screenWidth})
   }
   return state;
 };

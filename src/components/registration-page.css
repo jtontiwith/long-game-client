@@ -1,0 +1,88 @@
+.home {
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 1px;
+  background-color: #FFF;
+  border-top: 6px solid #0B6623;
+  display: inline-block;
+  margin: 80px 0 0 80px;
+  padding: 15px 0 0 0;
+}
+
+/* Here's the color pallet
+http://www.colourlovers.com/palette/101556/Flat
+#2C82C9 - blue
+#2CC990 - green
+#EEE657 - yellow
+#FF8300 - orange
+#FC6042 - red
+#f5f5f8 - light grey
+#d5cec5 - darker grey
+
+
+
+*/
+
+.reg-h2 {
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.byline {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-form {
+  text-align: center;
+  padding: 0px 35px 35px 35px;
+  margin-bottom: 50px;
+}
+
+#email, #password, #passwordConfirm {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.general-form-input {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 9px;
+}
+
+.hide {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+
+}
+
+.reg-login-footer {
+  display: block;
+  background-color: #f5f5f8;
+  padding: 20px 0 20px 0;
+  text-align: center;
+}
+
+.log-reg-submit-btn {
+  background-color: #2C82C9;
+  color: white;
+  border-radius: 3px;
+  box-shadow: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  padding: 6px 18px;
+  white-space: nowrap;
+  margin-bottom: 20px;
+  text-align: right !important;   
+  float: right;
+}
+
+.reg-login-footer-links {
+  color: #0B6623;
+}

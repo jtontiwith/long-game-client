@@ -12,9 +12,10 @@ export function LandingPage(props) {
 
     return (
         <div className="home">
-            <h2>Welcome to LongGame</h2>
+            <h2 class="reg-h2">Welcome to TopView</h2>
+            <div className="byline">The easy 5 year > 1 year > 1 month > 1 week > 1 day planning app</div>
             <LoginForm />
-            <Link to="/register">Register</Link>
+            <footer className="reg-login-footer"><Link to="/register" className="reg-login-footer-links">Register</Link> or check out the live <a href="#" className="reg-login-footer-links">demo</a>.</footer>
         </div>
     );
 }

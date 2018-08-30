@@ -3,6 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import Input from './input';
+import './login-form.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password')
@@ -24,13 +25,13 @@ export class RegistrationForn extends React.Component {
       <form className="login-form" onSubmit={this.props.handleSubmit(values => 
         this.onSubmit(values)
       )}>
-        <label htmlFor="email">Email</label>
-        <Field component={Input} type="email" name="email" validate={[required, nonEmpty, isTrimmed]} />
-        <label htmlFor="password">Password</label>
+        <label className="hide" htmlFor="email">Email</label>
+        <Field component={Input} type="email" name="email" placeholder="email" validate={[required, nonEmpty, isTrimmed]} />
+        <label className="hide" htmlFor="password">Password</label>
         <Field component={Input} type="password" name="password" validate={[required, passwordLength, isTrimmed]} />
-        <label htmlFor="passwordConfirm">Confirm password</label>
+        <label className="hide" htmlFor="passwordConfirm">Confirm password</label>
         <Field component={Input} type="password" name="passwordConfirm" validate={[required, nonEmpty, matchesPassword]} />
-        <button type="submit" disabled={this.props.pristine || this.props.submitting}>
+        <button type="submit" className="log-reg-submit-btn" disabled={this.props.pristine || this.props.submitting}>
           Register
         </button> 
       </form>

@@ -6,3 +6,11 @@ header {
   height: 78px;
 }
 
+@media only screen and (max-width: 474px) {
+  header {
+    height: 85px;
+  }
+ 
+}
+
+

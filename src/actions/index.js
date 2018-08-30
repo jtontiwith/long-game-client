@@ -36,8 +36,22 @@ export const getOutcome = (outcome) => {
   }
 }
 
+export const CLEAR_OUTCOME = 'CLEAR_OUTCOME';
+export const clearOutcome = () => {
+  console.log('We are clearing an outcome!')
+  return {
+    type: CLEAR_OUTCOME
+  }
+}
 
-
+export const SCREEN_WIDTH = 'SCREEN_WIDTH';
+export const screenWidth = (screenWidth) => {
+  console.log(screenWidth);
+  return {
+    type: SCREEN_WIDTH,
+    screenWidth
+  }
+}
 
 /*
 

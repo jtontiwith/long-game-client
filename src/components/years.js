@@ -64,8 +64,13 @@ export class Years extends React.Component {
     // number of days in between 
     const fiveYearPeriod = Math.floor((fiveYearEnd - fiveYearStart) / 86400000);
     //pixel width I have to work with (crossbrowswer)
-    const width1 = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  
+    const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    //if the width of the screen changes then grab it from props and use it for the positioning calc
+    const dynamicWidth = this.props.width != undefined ? this.props.width : width;
+    console.log(width)
+    console.log(this.props.width)
+
+
     const allOutcomes = this.props.outcomes
       .filter(outcome => outcome.range === 1825)
       .map((outcome, index) => {
@@ -76,9 +81,13 @@ export class Years extends React.Component {
       const pixelFinderFractionX1 = daysUntilOutcome1/fiveYearPeriod;
       //get the x-axis positioning by multiplying the number of available
       //pixels by the fraction topp={top}
-      const leftPositioning1 = Math.round(width1 * pixelFinderFractionX1);
+      let leftPositioning = Math.round(dynamicWidth * pixelFinderFractionX1);
+      //hack/fix to ensure outcomes at the end of periods don't run off screen
+      if(leftPositioning >= (width - 50)) {
+        leftPositioning = width - 80;
+      }
       //console.log(leftPositioning1);
-      return <YearCard leftp={leftPositioning1} outcomeInfo={outcome} key={index} />
+      return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
     });
 
     //console.log(`Outcomes for the 5YEAR ${allOutcomes}`);

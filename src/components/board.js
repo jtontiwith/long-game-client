@@ -8,7 +8,7 @@ import Month from './month';
 import Week from './week';
 import Today from './today';
 import requiresLogin from './requires-login';
-import {fetchBoard} from '../actions';
+import {fetchBoard, screenWidth} from '../actions';
 import HeaderBar from './header-bar';
 
 export class Board extends React.Component {
@@ -28,7 +28,12 @@ componentDidMount() {
     //the store state is redux, the single state of truth for the app
     //the local component state is just for the component
     
-    
+    window.onresize = () => {
+        const widthInPX = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        //console.log(width1);
+        this.props.dispatch(screenWidth(widthInPX))
+    }
+
     //let selectedOutcomeElement = []
     /*
     if(this.state.event != null) {
@@ -54,11 +59,7 @@ componentDidMount() {
     Basically I want to detect if range is X then activate Y style in 
     the corresponding component
     so like if range === 1825 then add className="background" the component
-
-
     */
-
-
     return (
         <div>
           {/*<div className="dashboard">
@@ -80,11 +81,11 @@ componentDidMount() {
               </ul>
             </nav>
           </header>
-          <Years range={range} outcomes={propsWithStandardDate} startDate={this.props.startDate} endDate={this.props.endDate} />
-          <Year range={range} outcomes={propsWithStandardDate} />
-          <Month range={range} outcomes={propsWithStandardDate} />
-          <Week range={range} outcomes={propsWithStandardDate} />
-          <Today range={range} outcomes={propsWithStandardDate} />
+          <Years range={range} width={this.props.width} outcomes={propsWithStandardDate} startDate={this.props.startDate} endDate={this.props.endDate} />
+          <Year range={range} width={this.props.width} outcomes={propsWithStandardDate} />
+          <Month range={range} width={this.props.width} outcomes={propsWithStandardDate} />
+          <Week range={range} width={this.props.width} outcomes={propsWithStandardDate} />
+          <Today range={range} width={this.props.width} outcomes={propsWithStandardDate} />
         </div>
       );  
     }
@@ -102,8 +103,9 @@ const mapStateToProps = state => {
     rangeCss: state.data.rangeCss,
     userId: state.auth.userId, 
     startDate: state.auth.startDate,
-    endDate: state.auth.endDate
-    }
+    endDate: state.auth.endDate,
+    width: state.data.screenWidthStore 
+  }
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Board));

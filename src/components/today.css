@@ -2,9 +2,11 @@
 
 .today-parent {
   position: relative;
-  height: 415px;
-  margin-bottom: 50px;
+  height: 530px;
+  background-color: #fff;
 }
+
+
 
 
 ul li {

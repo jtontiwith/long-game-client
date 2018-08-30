@@ -6,18 +6,19 @@ import {getOutcome} from '../actions';
 export class YearCard extends React.Component {
   handleClick(e) {
     e.preventDefault();
-    console.log(e.currentTarget)
     this.props.dispatch(getOutcome(e.currentTarget));
   }
 
 
   render() {
-    
-    let styles = {
-      position: 'absolute',
-      top: this.props.topp,
-      left: this.props.leftp
+    let styles;
+    if(this.props.leftp) {
+      styles = {
+        position: 'absolute',
+        left: this.props.leftp
+      }
     }
+    
 
     //console.log(this.props.outcomeInfo); onClick={(e) => this.props.outcomeGrabber(e)}
     return (
