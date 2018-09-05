@@ -1,12 +1,14 @@
 import React from 'react';
 import './year-card.css';
 import {connect} from 'react-redux';
-import {getOutcome} from '../actions';
+import {getOutcome, clearOutcome} from '../actions';
 
 export class YearCard extends React.Component {
   handleClick(e) {
     e.preventDefault();
-    this.props.dispatch(getOutcome(e.currentTarget));
+    this.props.dispatch(clearOutcome());
+    let etarget = e.currentTarget
+    setTimeout(() => { console.log(etarget); this.props.dispatch(getOutcome(etarget)) }, 1)
   }
 
 

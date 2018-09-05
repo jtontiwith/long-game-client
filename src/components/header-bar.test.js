@@ -1,22 +1,18 @@
 import React from 'react';
 //import configureStore from 'redux-mock-store'
 import {shallow, mount} from 'enzyme';
-import HeaderBar from './header-bar';
-import {login} from '../actions/auth';
-import {store} from '../store';
+import { HeaderBar } from './header-bar';
+
+
 
 describe('<HeaderBar />', () => {
   
   it('Renders without crashing', () => {
-    dispatch(login('jtonti@gmail.com', 'job1234567'))
-    shallow(
-      <Provider store={store}>
-        <HeaderBar />
-      </Provider>
-    )
+    const wrapper = shallow(<HeaderBar loggedIn={true} />)
+    expect(wrapper.find('button').hasClass('logout-button')).toEqual(true);
   });
   
- 
+  
 
 
 });

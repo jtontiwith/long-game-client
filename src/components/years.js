@@ -66,7 +66,7 @@ export class Years extends React.Component {
     //pixel width I have to work with (crossbrowswer)
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     //if the width of the screen changes then grab it from props and use it for the positioning calc
-    const dynamicWidth = this.props.width != undefined ? this.props.width : width;
+    const dynamicWidth = this.props.width !== undefined ? this.props.width : width;
     console.log(width)
     console.log(this.props.width)
 

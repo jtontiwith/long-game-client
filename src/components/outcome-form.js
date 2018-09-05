@@ -24,7 +24,7 @@ export class OutcomeForm extends React.Component {
     });
     //dispatch an action to clear the selectedOutcome or set it to false
     this.props.dispatch(clearOutcome());
-    console.log(this.state.editing)
+    //console.log(this.state.editing)
   }
 
 
@@ -42,13 +42,17 @@ export class OutcomeForm extends React.Component {
       //here we are updateing an existing outcome
       const selectedId = this.props.selectedOutcome.getAttribute('id');
       this.props.dispatch(updateOutcome(whatText, whyText, outcomeDate, range, selectedId, userId));
+      event.currentTarget.querySelectorAll('.update-delete-form .cancel-button')[0].click();
       //here we are posting and outcome for the first time
     } else if (event.currentTarget.className === 'add-form') { 
       this.props.dispatch(postOutcome(whatText, whyText, outcomeDate, range, userId))
+      event.currentTarget.querySelectorAll('.add-form .cancel-button')[0].click();
     } 
+    
     //console.log(`Here's the whatText ${whatText} and whyText ${whyText} and the date ${outcomeDate}`);
-    this.whatTextInput.value = '';
-    this.whyTextInput.value = '';
+    
+    //this.whatTextInput.value = '';
+    //this.whyTextInput.value = '';
   }
 
   handleDelete(event) {
@@ -56,6 +60,7 @@ export class OutcomeForm extends React.Component {
     const userId = this.props.userId;
     const selectedId = this.props.selectedOutcome.getAttribute('id');
     this.props.dispatch(deleteOutcome(selectedId, userId))
+    event.currentTarget.previousSibling.click();
     this.whatTextInput.value = '';
     this.whyTextInput.value = '';
   }
@@ -90,7 +95,7 @@ export class OutcomeForm extends React.Component {
       let selectedWhatText = children[0].childNodes[1].textContent;
       let selectedWhyText = children[0].childNodes[3].textContent; 
       let selectedDate = new Date(children[1].getAttribute('dateTime')).toISOString().substr(0,10);    
-      
+      //dispactch cancel every time I click on something
       return (
         <form className="update-delete-form" onSubmit={this.onSubmit}>   
           <input type="text" className="what-input" ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} defaultValue={selectedWhatText} />

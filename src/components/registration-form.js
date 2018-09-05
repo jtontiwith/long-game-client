@@ -5,18 +5,18 @@ import {login} from '../actions/auth';
 import Input from './input';
 import './login-form.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
-const passwordLength = length({min: 10, max: 72});
+const passwordLength = length({min: 6, max: 72});
 const matchesPassword = matches('password')
 
 
-export class RegistrationForn extends React.Component {
+export class RegistrationForm extends React.Component {
   onSubmit(values) {
     const {email, password} = values;
     const user = {email, password};
     return this.props
       .dispatch(registerUser(user))
       .then(() => this.props.dispatch(login(email, password)));
-}
+  }
 
 
 
@@ -49,4 +49,4 @@ export default reduxForm({
   form: 'registration',
   onSubmitFail: (errors, dispatch) => 
     dispatch(focus('registration', Object.keys(errors)[0]))
-})(RegistrationForn);
+})(RegistrationForm);

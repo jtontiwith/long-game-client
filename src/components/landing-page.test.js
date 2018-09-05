@@ -6,6 +6,7 @@ import { LandingPage } from './landing-page.js';
 
 describe('<LandingPage />', () => {
   it('Renders without crashing', () => {
-    shallow(<LandingPage />)
+   const wrapper = shallow(<LandingPage loggedin={false} />)
+   expect(wrapper.hasClass('home')).toEqual(true); 
   });
 });

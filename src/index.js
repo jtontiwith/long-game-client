@@ -25,8 +25,6 @@ const OUTCOMES = [
     whyText: 'so I can get a good job and create value for myself and others',
     date: futureDate1,
     range: 1825,
-    editing: false,
-    showDetail: false
   },
   {
     id: 2,

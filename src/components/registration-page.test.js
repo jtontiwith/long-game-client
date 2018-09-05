@@ -6,6 +6,7 @@ import { RegistrationPage } from './registration-page.js';
 
 describe('<RegistrationPage />', () => {
   it('Renders without crashing', () => {
-    shallow(<RegistrationPage />)
+   const wrapper = shallow(<RegistrationPage loggedin={false} />)
+   expect(wrapper.hasClass('home')).toEqual(true); 
   });
 });

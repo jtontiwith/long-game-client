@@ -8,6 +8,13 @@ import { YearCard } from './year-card.js';
 
 describe('<YearCard />', () => {
   it('Renders without crashing', () => {
-    shallow(<YearCard />)
+    shallow(<YearCard outcomeInfo={
+      {id: 1,
+       whatText: 'finish thinkful',
+       whyText: 'so I can get a good job and create value for myself and others',
+       date: new Date(),
+       range: 1825
+      }
+    } />)
   });
 });

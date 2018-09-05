@@ -9,9 +9,11 @@ export default class Month extends React.Component {
     //5 year start
     //const start = new Date();
     const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+    console.log(`firstDayOfMonth ${firstDayOfMonth}`)
     //one month end
     //const lastDayOfMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
     const lastDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+    console.log(`lastDayOfMonth ${lastDayOfMonth}`)
     //console.log(`star ${start} and monthedn ${lastDayOfMonth}`)
     // number of days in between 
     const oneMonthPeriod = Math.round(Math.abs((lastDayOfMonth - firstDayOfMonth) / 86400000));
@@ -39,7 +41,7 @@ export default class Month extends React.Component {
           leftPositioning = width - 80;
         }
         //console.log(`this is how many pix it should be from the left ${leftPositioning}`);
-        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} outcomeInfo={outcome} key={index} />
+        return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
       });
       
       //console.log(`The outcome for the MONTH ${oneMonthOutcomes}`);

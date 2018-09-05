@@ -86,3 +86,15 @@ http://www.colourlovers.com/palette/101556/Flat
 .reg-login-footer-links {
   color: #0B6623;
 }
+
+@media only screen and (max-width: 748px) { 
+  .home {
+    margin-left: 0;
+    width: 80%;
+  }
+
+  .app {
+    text-align: center;
+  }
+
+}

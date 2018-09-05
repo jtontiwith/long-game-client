@@ -28,7 +28,6 @@ export class HeaderBar extends React.Component {
 }
 
 
-
 const mapStateToProps = state => {
   console.log(state.auth.currentUser);
   return {

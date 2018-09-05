@@ -12,7 +12,7 @@ export default class Today extends React.Component {
     const todayOutcomes = this.props.outcomes
       .filter(outcome => outcome.date < endOfToday)
       .map((outcome, index) => {
-        return <li><YearCard outcomeInfo={outcome} outcomeInfo={outcome} key={index} /></li>
+        return <li><YearCard outcomeInfo={outcome} key={index} /></li>
       })
 
     return (

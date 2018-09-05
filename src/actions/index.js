@@ -2,8 +2,6 @@ import {normalizeResponseErrors} from './utils';
 import {API_BASE_URL} from '../config';
 console.log(API_BASE_URL);
 
-
-
 export const ADD_OUTCOME = 'ADD_OUTCOME';
 export const addOutcome = (whatText, whyText, date, range, userId) => ({
   type: ADD_OUTCOME,

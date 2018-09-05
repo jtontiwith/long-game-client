@@ -95,6 +95,7 @@ componentDidMount() {
 const mapStateToProps = state => {
   const {currentUser} = state.auth;
   console.log(state.outcomes)
+  console.log(state.data.outcome)
   return { 
     email: state.auth.currentUser.email,
     outcomes: state.data.outcomes || [],

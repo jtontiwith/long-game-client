@@ -9,17 +9,15 @@ export class LoginForm extends React.Component {
         return this.props.dispatch(login(values.email, values.password));
     }
 
-
-
     render() {
         
         let error;
         if (this.props.error) {
-            error = (
-                <div className="form-error" aria-live="polite">
-                    {this.props.error}
-                </div>
-            );
+          error = (
+            <div className="form-error" aria-live="polite">
+                {this.props.error}
+            </div>
+          );
         }
         return (
             <form
