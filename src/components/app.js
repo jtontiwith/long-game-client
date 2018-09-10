@@ -38,15 +38,15 @@ export class App extends React.Component {
   }
 
   render() {
-      return (
-        <div className="app">
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/register" component={RegistrationPage} />
-          <Route exact path="/board" component={Board} />
-        </div>
-      );
-     //there a Provider around the Board route for testing purposes 
-   }
+    return (
+      <div className="app">
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/register" component={RegistrationPage} />
+        <Route exact path="/board" component={Board} />
+      </div>
+    );
+  //there a Provider around the Board route for testing purposes 
+  }
 }
 
 const mapStateToProps = state => ({
