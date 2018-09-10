@@ -14,7 +14,7 @@ TopView is for people that want to fully align their 5 year plan with their dail
 ## Screenshots 
 
 ### Landing
-[[https://github.com/jtontiwith/long-game-client/blob/master/imgs/TopView_5yr_1yr_img.png]]
+![image](https://github.com/jtontiwith/long-game-client/blob/master/imgs/TopView_5yr_1yr_img.png)
 
 ### Dashboard
 ![image](https://user-images.githubusercontent.com/9849990/41680618-bf67c63a-7497-11e8-8f08-2304b1f5fb35.png)
