@@ -6,9 +6,9 @@
   background-color: #fff;
 }
 
-
-
-
 ul li {
   position: static !important;
+  list-style: none;
 }
+
+

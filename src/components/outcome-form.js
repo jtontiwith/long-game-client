@@ -5,16 +5,14 @@ import {deleteOutcome, updateOutcome, postOutcome, clearOutcome} from "../action
 
 
 export class OutcomeForm extends React.Component {
+  //local state for expanding/collapsing the form
   constructor(props) {
     super(props);  
     this.state = {
       editing: false
     }
-  
-    this.onSubmit = this.onSubmit.bind(this); //what does this do
-    //binding, making sure this is going to be this, and not 
-    //we are preserving the scope 
-    console.log(this.state);
+    //presever scope
+    this.onSubmit = this.onSubmit.bind(this); 
   }
   
   setEditing(editing, e) {
@@ -22,12 +20,9 @@ export class OutcomeForm extends React.Component {
     this.setState({
       editing
     });
-    //dispatch an action to clear the selectedOutcome or set it to false
+    //dispatch an action to clear the selectedOutcome
     this.props.dispatch(clearOutcome());
-    //console.log(this.state.editing)
   }
-
-
 
   onSubmit(event) {
     event.preventDefault();
@@ -36,8 +31,7 @@ export class OutcomeForm extends React.Component {
     const outcomeDate = new Date(this.outcomeDate.value.replace(/-/g, '\/')); 
     const range = this.props.range;
     const userId = this.props.userId;
-    //console.log(event.currentTarget.childNodes[3].className);
-    //console.log(event.currentTarget.lastChild.className)
+    //pop different forms depending on what the user selected
     if(event.currentTarget.className === 'update-delete-form') {
       //here we are updateing an existing outcome
       const selectedId = this.props.selectedOutcome.getAttribute('id');
@@ -48,11 +42,6 @@ export class OutcomeForm extends React.Component {
       this.props.dispatch(postOutcome(whatText, whyText, outcomeDate, range, userId))
       event.currentTarget.querySelectorAll('.add-form .cancel-button')[0].click();
     } 
-    
-    //console.log(`Here's the whatText ${whatText} and whyText ${whyText} and the date ${outcomeDate}`);
-    
-    //this.whatTextInput.value = '';
-    //this.whyTextInput.value = '';
   }
 
   handleDelete(event) {
@@ -65,37 +54,16 @@ export class OutcomeForm extends React.Component {
     this.whyTextInput.value = '';
   }
   
-  render() {
-    /*if(this.props.selectedOutcome) {
-      this.state = {
-        editing: false
-      }
-      
-    }  
-    this is probably all happening b/c I am not using redux
-    
-    What's the problem?
-    The cancel button on the update-delete-form doesn't work the same
-    as it does on the add-form 
-
-    Why isn't it working?
-    if there's no this.props.selectedOutcome then we return a di
-    
-    
-    
-    
-    */
-    
-    
-    
-    console.log(this.props.selectedOutcome);
+  render() { 
     if(this.props.selectedOutcome) {
-      
+      //grabbing the individual values of the outcome the user selected 
+      //so we can populate the form with them
       let children = this.props.selectedOutcome.childNodes;
       let selectedWhatText = children[0].childNodes[1].textContent;
       let selectedWhyText = children[0].childNodes[3].textContent; 
       let selectedDate = new Date(children[1].getAttribute('dateTime')).toISOString().substr(0,10);    
-      //dispactch cancel every time I click on something
+    
+      //return form to edit outcome
       return (
         <form className="update-delete-form" onSubmit={this.onSubmit}>   
           <input type="text" className="what-input" ref={input => this.whatTextInput = input} aria-label={'What\'s your outcome?'} defaultValue={selectedWhatText} />
@@ -109,10 +77,10 @@ export class OutcomeForm extends React.Component {
             <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
           </div>
         </form>
-      )
-      
+      );
     }
 
+    //return add outcome link
     if(!this.state.editing) {
       return (
         <div className="add-button" onClick={(e) => this.setEditing(true, e)}>
@@ -121,6 +89,7 @@ export class OutcomeForm extends React.Component {
       );
     } 
     
+    //return form to post outcome
     if (this.state.editing) {
       let dateToday = new Date().toISOString().substr(0,10); 
       return (
@@ -142,16 +111,3 @@ export class OutcomeForm extends React.Component {
 }
 
 export default connect()(OutcomeForm);
-/*
-
-<button>Delete</button>
-          <button type="button" onClick={() => this.setEditing(false)}>
-            Cancel
-          </button>
-
-          if(whatText && outcomeDate && this.props.onAdd) {
-      this.props.onAdd(whatText, whyText, outcomeDate, range)
-    }
-
-
-*/

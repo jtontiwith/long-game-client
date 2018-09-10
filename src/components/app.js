@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Route, withRouter, Link} from 'react-router-dom';
-import {Provider} from 'react-redux';
 import Board from './board';
 import LandingPage from './landing-page';
 import RegistrationPage from './registration-page';
@@ -57,26 +56,3 @@ const mapStateToProps = state => ({
 
 // Deal with update blocking - https://reacttraining.com/react-router/web/guides/dealing-with-update-blocking
 export default withRouter(connect(mapStateToProps)(App));
-
-//you only use the withRouter in the app component
-
-/*
-The old working one...
-
-this was in <Board /> - outcomes={props.outcomes}
-
-export default function App(props) {
-  return (
-    <Router>
-      <div> {console.log(props.outcomes)}
-        <main>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/board/:userId" render={() => <Board outcomes={props.outcomes} />} />
-          <h3><Link to="/board/:userId">login</Link></h3>
-        </main>
-      </div>
-    </Router>
-  )
-}
-
-*/

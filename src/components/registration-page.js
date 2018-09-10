@@ -13,6 +13,8 @@ export function RegistrationPage(props) {
       return <Redirect to="/board/" /> //this has to become dynamic
   }
 
+  //dispatch login action for sample user so people can check out 
+  //the app without creating a login
   function handleClick(e) {
     e.preventDefault();
     props.dispatch(login('sampleuser@example.com', '1111111111'));

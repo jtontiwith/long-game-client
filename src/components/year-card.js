@@ -11,18 +11,25 @@ export class YearCard extends React.Component {
     setTimeout(() => { console.log(etarget); this.props.dispatch(getOutcome(etarget)) }, 1)
   }
 
-
   render() {
+    //outcomes can appear differently if they are in the Today component and 
+    //they have dynamic left positioning so we take care of that here
     let styles;
-    if(this.props.leftp) {
-      styles = {
-        position: 'absolute',
-        left: this.props.leftp
-      }
+    if(this.props.outcomeInToday) {
+        styles = {
+          'fontSize': '18px',
+          'width': '80%',
+          'border': 'none',
+          'backgroundColor': 'inherit',
+          'box-shadow': 'none'
+        }
+      } else if (this.props.leftp) {
+        styles = {
+          position: 'absolute',
+          left: this.props.leftp
+        }
     }
-    
 
-    //console.log(this.props.outcomeInfo); onClick={(e) => this.props.outcomeGrabber(e)}
     return (
       <article id={this.props.outcomeInfo.id} onClick={(e) => this.handleClick(e)}  style={styles} className="outcome">
         <dl>

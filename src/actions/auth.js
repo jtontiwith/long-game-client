@@ -46,6 +46,7 @@ const storeAuthInfo = (authToken, userId, startDate, endDate, dispatch) => {
     saveAuthToken(authToken, userId, startDate, endDate);
 };
 
+//login action 
 export const login = (email, password) => dispatch => {
     dispatch(authRequest());
     console.log(`the email ${email} and password ${password}`)
@@ -86,6 +87,7 @@ export const login = (email, password) => dispatch => {
     );
 };
 
+//refresh action 
 export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;

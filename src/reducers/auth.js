@@ -35,7 +35,6 @@ export default function reducer(state = initialState, action) {
           userId: action.userId,
           startDate: action.startDate,
           endDate: action.endDate,
-          dates: 'where are ya?'
       });
   } else if (action.type === AUTH_ERROR) {
       return Object.assign({}, state, {

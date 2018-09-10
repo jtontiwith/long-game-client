@@ -4,7 +4,7 @@
   border: none;
   color: white;
   padding: 5px 16px;
-  font-size: 16px;
+  font-size: 17px;
   margin-top: 4px;
   opacity: 0.75;
   transition: 0.3s;
@@ -37,6 +37,7 @@
   display: inline-block;
   margin-right: 15px;
   padding: 2px 9px;
+  font-size: 16px;
 }
 
 .highlight-time-period {

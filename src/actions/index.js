@@ -2,6 +2,7 @@ import {normalizeResponseErrors} from './utils';
 import {API_BASE_URL} from '../config';
 console.log(API_BASE_URL);
 
+//add an outcome to the board action
 export const ADD_OUTCOME = 'ADD_OUTCOME';
 export const addOutcome = (whatText, whyText, date, range, userId) => ({
   type: ADD_OUTCOME,
@@ -12,6 +13,7 @@ export const addOutcome = (whatText, whyText, date, range, userId) => ({
   userId
 });
 
+//action to user is and set in montion visual cues
 export const GET_RANGE = 'GET_RANGE';
 export const getRange = (yRange, rangeCss) => {
   console.log(`YS ACTIONS ${yRange}`)
@@ -34,6 +36,7 @@ export const getOutcome = (outcome) => {
   }
 }
 
+//clearing an outcome 
 export const CLEAR_OUTCOME = 'CLEAR_OUTCOME';
 export const clearOutcome = () => {
   console.log('We are clearing an outcome!')
@@ -42,6 +45,7 @@ export const clearOutcome = () => {
   }
 }
 
+//getting screen width for the calc to place outcomes
 export const SCREEN_WIDTH = 'SCREEN_WIDTH';
 export const screenWidth = (screenWidth) => {
   console.log(screenWidth);
@@ -51,29 +55,7 @@ export const screenWidth = (screenWidth) => {
   }
 }
 
-/*
-
-export const GET_RANGE = 'GET_RANGE';
-export const getRange = (yRange) => {
-  console.log(yRange)
-  return {
-    type: GET_RANGE,
-    yRange
-  };
-} 
-
-
-fetch(url, {
-  method: 'POST', // or 'PUT'
-  body: JSON.stringify(data), // data can be `string` or {object}!
-  headers:{
-    'Content-Type': 'application/json'
-  }
-}).then(res => res.json())
-.catch(error => console.error('Error:', error))
-.then(response => console.log('Success:', response));
-*/
-
+//deleting an outcome
 export const deleteOutcome = (selectedId, userId) => dispatch => {
   console.log('THIS THING RUNNING?')
   fetch(`${API_BASE_URL}/outcomes/${selectedId}`, {
@@ -115,7 +97,7 @@ export const updateOutcome = (whatText, whyText, date, range, selectedId, userId
   }).then(res => dispatch(fetchBoard(userId)));
 }; 
 
-//action to post and outcome to the db
+//action to post an outcome to the db
 export const postOutcome = (whatText, whyText, date, range, userId) => dispatch => {
   fetch(`${API_BASE_URL}/outcomes`, {
     method: 'POST',
@@ -170,25 +152,3 @@ export const fetchBoard = (userId) => (dispatch, getState) => {
       dispatch(fetchBoardSuccess(outcomes.outcomesModels));
     });
 };
-
-
-/*
-old working version
-
-export const fetchBoard = () => dispatch => {
-  fetch(`${API_BASE_URL}/outcomes`).then(res => {
-    if(!res.ok) {
-      return Promise.reject(res.statusText);
-    }
-    console.log(res);
-    return res.json(); //here I specify the format of the response
-  }).then(outcomes => {
-    console.log(outcomes.outcomesModels);
-    dispatch(fetchBoardSuccess(outcomes.outcomesModels));
-  });
-};
-
-
-
-
-*/

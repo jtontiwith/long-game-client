@@ -1,6 +1,4 @@
 export const loadAuthToken = () => {
-  //return localStorage.getItem('authToken');
-  //return localStorage.getItem('userId');
   return {
     authToken: localStorage.getItem('authToken'),
     userId: localStorage.getItem('userId'),
@@ -25,4 +23,4 @@ export const clearAuthToken = () => {
   } catch (e) {}
 };
 
-//remember that's it wrapped in try for Safari 
+//remember that it's wrapped in try for Safari 

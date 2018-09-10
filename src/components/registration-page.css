@@ -1,6 +1,6 @@
 .home {
   background-color: #fff;
-  max-width: 400px;
+  max-width: 430px;
   width: 100%;
   border-radius: 1px;
   background-color: #FFF;
@@ -30,7 +30,7 @@ http://www.colourlovers.com/palette/101556/Flat
 }
 
 .byline {
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -51,6 +51,7 @@ http://www.colourlovers.com/palette/101556/Flat
   border: 1px solid #ccc;
   border-radius: 2px;
   padding: 9px;
+  font-size: 14px;
 }
 
 .hide {
@@ -65,6 +66,7 @@ http://www.colourlovers.com/palette/101556/Flat
   background-color: #f5f5f8;
   padding: 20px 0 20px 0;
   text-align: center;
+  font-size: 16px;
 }
 
 .log-reg-submit-btn {
