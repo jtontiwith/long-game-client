@@ -14,35 +14,35 @@ TopView is for people that want to fully align their 5 year plan with their dail
 ## Screenshots 
 
 ### Landing
+![image](https://github.com/jtontiwith/long-game-client/blob/master/imgs/TopView_Landing_Screen.png)
+
+The landing, go check the demo, no need to sign up.
+
+### Life Board
 ![image](https://github.com/jtontiwith/long-game-client/blob/master/imgs/TopView_5yr_1yr_img.png)
 
-### Dashboard
-![image](https://user-images.githubusercontent.com/9849990/41680618-bf67c63a-7497-11e8-8f08-2304b1f5fb35.png)
+You begin to understand here how outcomes (the results you design for your life) cascade down to the shorter time horizons. So if you set a 5 year outcome with a date of 2020, it will show up in your 1 year plan when the year hits 2020.
 
-### Concept Designing a Prototype
-![image](https://user-images.githubusercontent.com/9849990/41680820-5ab53c9e-7498-11e8-89d6-09a07de2fa6b.png)
+### Life Board (shot 2)
+![image](https://github.com/jtontiwith/long-game-client/blob/master/imgs/TopView_Week_Day.png)
+
+The cascading outcomes work across all levels so if you plan finish X by Wednesday just know that Wednesday X will be sitting in Today.
 
 ## Live Demo 
 
-[Live Site](https://noobz.herokuapp.com/)
-
-## Environment Setup 
-
-1. Clone the repo.
-2. Run npm install.
-3. Get goin!
+[Live Site](https://mighty-citadel-80893.herokuapp.com/)
 
 ## Built With 
 
-* JS
-* node.js
-* jQuery 
+* ES6
+* React & Redux
+* Node.js
+* Express.js
 * HTML
 * CSS
-* a little empathy for the non-technical founder, they do the business execution that turns code into a real company
 
 ## Features 
 
-* Prototype concept design editor
-* Publish your prototype designs to a public feed so that n00b devs contact you to start building it
-* Dynamic list of curated resources (that are super concise) to help you design your prototype concept
+* Smart timelines for 5 year > 1 year > 1 month > 1 week > 1 day planning!
+* Cascading outcomes so you can see your long-term goals come due
+
