@@ -15,7 +15,7 @@ export default class Year extends React.Component {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     //here we are filter out the outcomes for the year
     const oneYearOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date < lastDayOfYear && outcome.range >= 365)
+      .filter(outcome => outcome.date <= lastDayOfYear && outcome.range >= 365)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
         const daysUntilOutcome = Math.round(Math.abs((outcome.date - firstDayOfYear) / 86400000));

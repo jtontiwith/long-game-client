@@ -15,7 +15,7 @@ export default class Month extends React.Component {
     //here we filter out the outcomes that don't fall by the end of
     //the month
     const oneMonthOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date < lastDayOfMonth && outcome.range >= 30)
+      .filter(outcome => outcome.date <= lastDayOfMonth && outcome.range >= 30)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
         const daysUntilOutcome = Math.round(Math.abs((outcome.date - firstDayOfMonth) / 86400000));
