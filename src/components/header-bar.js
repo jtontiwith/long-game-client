@@ -9,8 +9,7 @@ export class HeaderBar extends React.Component {
         this.props.dispatch(clearAuth());
         clearAuthToken();
     }
-    //testing should be line-by-line, test the methods, not props/state
-    //don't test what you didn't code
+    
     render() {
         // Only render the log out button if we are logged in
         let logOutButton;
