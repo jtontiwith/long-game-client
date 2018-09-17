@@ -20,7 +20,7 @@ export default class Week extends React.Component {
     //here we are filter out the outcomes that don't fall by the end of
     //the week
     const oneWeekOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date <= lastDayOfWeek && outcome.range >= 7)
+      .filter(outcome => outcome.date <= lastDayOfWeek && outcome.date >= firstDayOfWeek && outcome.range >= 7)
       .map((outcome, index) => {
         //find # of days until the outcome is to be reached
         const daysUntilOutcome = Math.round(Math.abs((outcome.date - firstDayOfWeek) / 86400000));

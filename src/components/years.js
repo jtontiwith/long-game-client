@@ -72,7 +72,7 @@ export class Years extends React.Component {
 
 
     const allOutcomes = this.props.outcomes
-      .filter(outcome => outcome.range === 1825)
+      .filter(outcome => outcome.date >= fiveYearStart && outcome.date <= fiveYearEnd && outcome.range === 1825)
       .map((outcome, index) => {
       //find # of days until the outcome is to be reached
       console.log(`here's the date ${outcome.date} and teh ${outcome.whatText}`)

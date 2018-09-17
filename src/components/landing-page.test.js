@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import { LandingPage } from './landing-page.js';
 
@@ -10,3 +10,24 @@ describe('<LandingPage />', () => {
    expect(wrapper.hasClass('home')).toEqual(true); 
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

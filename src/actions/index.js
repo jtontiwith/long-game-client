@@ -152,3 +152,5 @@ export const fetchBoard = (userId) => (dispatch, getState) => {
       dispatch(fetchBoardSuccess(outcomes.outcomesModels));
     });
 };
+
+
