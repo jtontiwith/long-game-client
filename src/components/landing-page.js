@@ -19,7 +19,7 @@ export function LandingPage(props) {
 
     return (
         <div className="home">
-            <h2 class="reg-h2">Welcome to TopView</h2>
+            <h2 className="reg-h2">Welcome to TopView</h2>
             <div className="byline">It's 5 year > 1 year > 1 month > 1 week > 1 day planning!</div>
             <LoginForm />
             <footer className="reg-login-footer"><Link to="/register" className="reg-login-footer-links">Register</Link> or check out the live <a href="#" onClick={handleClick} className="reg-login-footer-links">demo</a>.</footer>

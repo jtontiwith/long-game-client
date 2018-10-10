@@ -6,6 +6,7 @@ import authReducer from './reducers/auth';
 import {setAuthToken, refreshAuthToken} from './actions/auth';
 import {reducer} from './reducers';
 
+
 const store = createStore(
   combineReducers({
     form: formReducer,
@@ -17,10 +18,14 @@ const store = createStore(
   // Hydrate the authToken from localStorage if it exist
 const dataFromLocalStorage = loadAuthToken();
 if (dataFromLocalStorage) {
+    
     const token = dataFromLocalStorage.authToken;
+    const startDate = dataFromLocalStorage.startDate;
+    const endDate = dataFromLocalStorage.endDate;
     const userId = dataFromLocalStorage.userId;
-    store.dispatch(setAuthToken(token));
-    store.dispatch(refreshAuthToken(userId, dataFromLocalStorage.startDate, dataFromLocalStorage.endDate));
+    
+    store.dispatch(setAuthToken(token, startDate, endDate, userId));
+    store.dispatch(refreshAuthToken());
 }
 
 export default store;

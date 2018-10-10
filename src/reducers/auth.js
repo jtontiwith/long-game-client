@@ -16,7 +16,10 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   if (action.type === SET_AUTH_TOKEN) {
       return Object.assign({}, state, {
-          authToken: action.authToken
+          authToken: action.authToken,
+          startDate: action.startDate,
+          endDate: action.endDate,
+          userId: action.userId
       });
   } else if (action.type === CLEAR_AUTH) {
       return Object.assign({}, state, {

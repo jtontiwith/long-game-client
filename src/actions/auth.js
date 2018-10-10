@@ -6,9 +6,12 @@ import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
-export const setAuthToken = authToken => ({
+export const setAuthToken = (authToken, startDate, endDate, userId) => ({
     type: SET_AUTH_TOKEN,
-    authToken
+    authToken,
+    startDate,
+    endDate, 
+    userId
 });
 
 export const CLEAR_AUTH = 'CLEAR_AUTH';
@@ -67,8 +70,6 @@ export const login = (email, password) => dispatch => {
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
             .then(({authToken, userId, startDate, endDate}) => storeAuthInfo(authToken, userId, startDate, endDate, dispatch))
-            //.then(({authToken, userId}) => storeAuthInfo(authToken, userId, dispatch))
-            .then(res => console.log('do we make it to here?'))
             .catch(err => {
                 const {code} = err;
                 const message =
@@ -89,11 +90,18 @@ export const login = (email, password) => dispatch => {
 
 //refresh action export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getState) => {
 export const refreshAuthToken = () => (dispatch, getState) => {
+    
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
     const startDate = getState().auth.startDate;
     const endDate = getState().auth.endDate;
     const userId = getState().auth.userId
+   /*console.log(`
+        authToken = ${authToken}
+        startDate = ${startDate}
+        endDate = ${endDate}
+        userId = ${userId}
+    `)*/
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
