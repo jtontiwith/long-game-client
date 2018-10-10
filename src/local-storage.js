@@ -1,6 +1,5 @@
 export const loadAuthToken = () => {
-  return {
-    authToken: localStorage.getItem('authToken'),
+  return { authToken: localStorage.getItem('authToken'),
     userId: localStorage.getItem('userId'),
     startDate: localStorage.getItem('startDate'),
     endDate: localStorage.getItem('endDate')

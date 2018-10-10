@@ -13,7 +13,7 @@ export default class Today extends React.Component {
     //the outcomeInToday prop set to true simple marks the coutcomes 
     //generated in the Today component, as they will have different styling
     const todayOutcomes = this.props.outcomes
-      .filter(outcome => outcome.date >= startOfToday && outcome.date < endOfToday)
+      .filter(outcome => outcome.date >= startOfToday && outcome.date <= endOfToday)
       .map((outcome, index) => {
         return <li><YearCard outcomeInfo={outcome} outcomeInToday={true} key={index} /></li>
       })

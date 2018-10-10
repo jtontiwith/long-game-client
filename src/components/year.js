@@ -8,6 +8,9 @@ export default class Year extends React.Component {
   render() {
     /* the calc for positioning */
     const firstDayOfYear = new Date(new Date().getFullYear(), 0, 1);
+    const firstDayofYearRAW = new Date().getFullYear()
+    console.log(`FIRST DAY OF YEAR RAW: ${firstDayofYearRAW}`)
+    console.log(`FIRST DAY OF YEAR: ${firstDayOfYear}`)
     const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31)
     // number of days in between 
     const currentYearPeriod = Math.floor((lastDayOfYear - firstDayOfYear) / 86400000)

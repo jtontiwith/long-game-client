@@ -68,9 +68,7 @@ componentDidMount() {
 }
 
 const mapStateToProps = state => {
-  const {currentUser} = state.auth;
-  console.log(state.outcomes)
-  console.log(state.data.outcome)
+  console.log(`START DATE FROM DB ${state.auth.startDate}`)
   return { 
     email: state.auth.currentUser.email,
     outcomes: state.data.outcomes || [],
@@ -85,4 +83,3 @@ const mapStateToProps = state => {
 };
 
 export default requiresLogin()(connect(mapStateToProps)(Board));
-//export default connect(mapStateToProps)(Board);

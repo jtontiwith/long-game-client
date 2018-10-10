@@ -87,13 +87,13 @@ export const login = (email, password) => dispatch => {
     );
 };
 
-//refresh action 
-export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getState) => {
+//refresh action export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getState) => {
+export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
-    //const startDateFromStore = getState().auth.startDate;
-    //const endDateFromStore = getState().auth.endDate;
-    //console.log(`start ${startDateFromStore} and end ${endDateFromStore}`)
+    const startDate = getState().auth.startDate;
+    const endDate = getState().auth.endDate;
+    const userId = getState().auth.userId
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {
@@ -103,7 +103,6 @@ export const refreshAuthToken = (userId, startDate, endDate) => (dispatch, getSt
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        //.then(res => console.log(res.json()))
         .then(({authToken}) => storeAuthInfo(authToken, userId, startDate, endDate, dispatch))
         .catch(err => {
             // We couldn't get a refresh token because our current credentials

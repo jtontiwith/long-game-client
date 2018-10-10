@@ -59,6 +59,8 @@ export class Years extends React.Component {
   render() {
     //5 year start
     const fiveYearStart = new Date(this.props.startDate);
+    console.log(`FIVE YEAR START RAW: ${this.props.startDate}`);
+    console.log(`FIVE YEAR START: ${fiveYearStart}`);
     //5 year end
     const fiveYearEnd = new Date(this.props.endDate)
     // number of days in between 
