@@ -71,7 +71,7 @@ export class Years extends React.Component {
     const dynamicWidth = this.props.width !== undefined ? this.props.width : width;
     console.log(width)
     console.log(this.props.width)
-
+    console.log(this.props.outcomes)
 
     const allOutcomes = this.props.outcomes
       .filter(outcome => outcome.date >= fiveYearStart && outcome.date <= fiveYearEnd && outcome.range === 1825)

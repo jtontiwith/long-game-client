@@ -1,8 +1,64 @@
 
 
 .one-week-parent {
-  position: relative;
   height: 200px;
   padding: 10px;
   background-color: #fff;
+  text-align: center;
+  
 }
+
+.day {
+  min-height: 180px;
+  border-left: 1px solid #eceaea;
+  padding: 0 5px 0 5px;
+
+}
+
+.day-wrapper div {
+  text-decoration: underline;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.day-wrapper {
+  width: 14.2%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@media only screen and (max-width: 1295px) {
+ 
+}
+
+@media only screen and (max-width: 900px) {
+  .one-week-parent {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .day-wrapper {
+    width: 160px;
+    white-space: normal;
+  }
+
+
+}
+
+
+
+
+
+/*
+
+
+
+
+if screen is less than 900px show M, T, W
+also show a button or something to get to Th, F, Sat, Sun
+
+I feel anxious b/c I am not sure how to move forward, unexplored 
+territory 
+
+*/

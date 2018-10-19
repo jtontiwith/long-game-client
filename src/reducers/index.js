@@ -41,7 +41,6 @@ export const reducer = (state=initialState, action) => {
   if(action.type === actions.ADD_OUTCOME) {
     return Object.assign({}, state, {
       outcomes: [...state.outcomes, {
-        id: 8,
         whatText: action.whatText,
         whyText: action.whyText,
         date: action.date,

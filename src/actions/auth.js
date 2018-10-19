@@ -96,12 +96,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     const startDate = getState().auth.startDate;
     const endDate = getState().auth.endDate;
     const userId = getState().auth.userId
-   /*console.log(`
-        authToken = ${authToken}
-        startDate = ${startDate}
-        endDate = ${endDate}
-        userId = ${userId}
-    `)*/
+   
     return fetch(`${API_BASE_URL}/auth/refresh`, {
         method: 'POST',
         headers: {

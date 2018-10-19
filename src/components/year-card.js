@@ -21,14 +21,22 @@ export class YearCard extends React.Component {
           'width': '80%',
           'border': 'none',
           'backgroundColor': 'inherit',
-          'box-shadow': 'none'
+          'boxShadow': 'none'
+        }
+      } else if (this.props.outcomeInWeek) {
+        styles = {
+          'width': '90%',
+          'border': 'none',
+          'backgroundColor': 'inherit',
+          'boxShadow': 'none'
         }
       } else if (this.props.leftp) {
         styles = {
           position: 'absolute',
-          left: this.props.leftp
+          left: this.props.leftp,
+          'bottom': '70px'
         }
-    }
+    } 
 
     return (
       <article id={this.props.outcomeInfo.id} onClick={(e) => this.handleClick(e)}  style={styles} className="outcome">
