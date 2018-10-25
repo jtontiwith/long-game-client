@@ -6,6 +6,7 @@ export default class Week extends React.Component {
   render() {
     /* the calc for week begin and end */
     const first = ((new Date().getDate() - new Date().getDay()) + 1) //get the day of the month (in a num), subtract the day of the week (again in a num), and add one so that's it now a Sunday
+    console.log(`First: ${first} `)
     const last = first + 6; // last day is the first day + 6
     const firstDayOfWeek = new Date(new Date().setDate(first));
     firstDayOfWeek.setHours(0,0,0,0);

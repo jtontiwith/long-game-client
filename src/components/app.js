@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route, withRouter, Link} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 import Board from './board';
 import LandingPage from './landing-page';
 import RegistrationPage from './registration-page';
@@ -16,7 +16,8 @@ export class App extends React.Component {
           // Stop refreshing when we log out
           this.stopPeriodicRefresh();
       }
-  }
+      
+}
 
   componentWillUnmount() {
       this.stopPeriodicRefresh();

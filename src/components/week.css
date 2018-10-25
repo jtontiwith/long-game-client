@@ -27,10 +27,6 @@
   vertical-align: top;
 }
 
-@media only screen and (max-width: 1295px) {
- 
-}
-
 @media only screen and (max-width: 900px) {
   .one-week-parent {
     overflow-x: scroll;

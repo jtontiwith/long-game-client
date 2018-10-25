@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import './outcome-form.css';
 import {deleteOutcome, updateOutcome, postOutcome, clearOutcome} from "../actions";
 
-
 export class OutcomeForm extends React.Component {
   //local state for expanding/collapsing the form
   constructor(props) {
@@ -55,6 +54,7 @@ export class OutcomeForm extends React.Component {
   }
   
   render() { 
+
     if(this.props.selectedOutcome) {
       //grabbing the individual values of the outcome the user selected 
       //so we can populate the form with them
@@ -83,8 +83,8 @@ export class OutcomeForm extends React.Component {
     //return add outcome link
     if(!this.state.editing) {
       return (
-        <div className="add-button" onClick={(e) => this.setEditing(true, e)}>
-          <a className="show-form-link" href="#">Add Outcome</a>
+        <div className="add-button">
+          <a className="show-form-link" onClick={(e) => this.setEditing(true, e)} href="#">Add Outcome</a>
         </div>
       );
     } 
@@ -107,7 +107,8 @@ export class OutcomeForm extends React.Component {
       );  
     } 
     
-  }    
+  }
+
 }
 
 export default connect()(OutcomeForm);
