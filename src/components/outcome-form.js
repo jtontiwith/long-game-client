@@ -1,27 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { deleteOutcome, updateOutcome, postOutcome } from "../actions";
 import './outcome-form.css';
-import {deleteOutcome, updateOutcome, postOutcome, clearOutcome} from "../actions";
+
 
 export class OutcomeForm extends React.Component {
   //local state for expanding/collapsing the form
   constructor(props) {
     super(props);  
-    this.state = {
-      editing: false
-    }
-    //presever scope
     this.onSubmit = this.onSubmit.bind(this); 
-  }
-  
-  setEditing(editing, e) {
-    e.preventDefault();
-    this.setState({
-      editing
-    });
-    //dispatch an action to clear the selectedOutcome
-    this.props.dispatch(clearOutcome());
-  }
+  }   
 
   onSubmit(event) {
     event.preventDefault();
@@ -54,7 +42,6 @@ export class OutcomeForm extends React.Component {
   }
   
   render() { 
-
     if(this.props.selectedOutcome) {
       //grabbing the individual values of the outcome the user selected 
       //so we can populate the form with them
@@ -71,7 +58,7 @@ export class OutcomeForm extends React.Component {
           <input type="date" className="date-input" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={selectedDate} />
           <div className="form-buttons">
             <button className="update-button">Update</button>
-            <button className="cancel-button cancel-btn-update-delete" type="button" onClick={(e) => this.setEditing(false, e)}>
+            <button className="cancel-button cancel-btn-update-delete" type="button" onClick={(e) => this.props.setEditing(false, e)}>
               Cancel
             </button>
             <button onClick={this.handleDelete.bind(this)} className="delete-button">Delete</button>
@@ -79,18 +66,9 @@ export class OutcomeForm extends React.Component {
         </form>
       );
     }
-
-    //return add outcome link
-    if(!this.state.editing) {
-      return (
-        <div className="add-button">
-          <a className="show-form-link" onClick={(e) => this.setEditing(true, e)} href="#">Add Outcome</a>
-        </div>
-      );
-    } 
     
     //return form to post outcome
-    if (this.state.editing) {
+    if (/*this.props.showForm*/ /*this.state.editing*/ this.props.editing) {
       let dateToday = new Date().toISOString().substr(0,10); 
       return (
         <form className="add-form" onSubmit={this.onSubmit}>   
@@ -99,16 +77,26 @@ export class OutcomeForm extends React.Component {
           <input type="date" className="date-input" id="date" ref={input => this.outcomeDate = input} aria-label={'Commit to a date'} defaultValue={dateToday} />
           <div className="form-buttons">
             <button className="add-outcome-button">Add</button>
-            <button className="cancel-button" type="button" onClick={(e) => this.setEditing(false, e)}>
+            <button className="cancel-button" type="button" onClick={(e) => this.props.setEditing(false, e)}>
               Cancel
             </button>
           </div>
         </form>
       );  
+    } else {
+      return null;
     } 
     
   }
 
 }
 
-export default connect()(OutcomeForm);
+const mapStateToProps = state =>  {
+  console.log(state)
+  return { showForm: state.data.showForm };
+}
+
+
+
+
+export default connect(mapStateToProps)(OutcomeForm);

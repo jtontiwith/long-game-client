@@ -2,20 +2,35 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './board.css';
 import OutcomeForm from './outcome-form';
+import OutcomeButton from './outcome-button';
 import Years from './years';
 import Year from './year';
 import Month from './month';
 import Week from './week';
 import Today from './today';
 import requiresLogin from './requires-login';
-import {fetchBoard, screenWidth} from '../actions';
-import HeaderBar from './header-bar';
+import {fetchBoard, screenWidth, showForm} from '../actions';
+import ScrollControl from './scroll-control';
+import { clearOutcome } from "../actions";
 
 export class Board extends React.Component {
-  
-componentDidMount() {
-  this.props.dispatch(fetchBoard(this.props.userId));
-}
+  constructor(props) {
+    super(props);  
+    this.state = {
+      editing: false
+    }
+  }
+
+  setEditing = (editing, e) => {
+    e.preventDefault();
+    this.setState({ editing });
+    //dispatch an action to clear the selectedOutcome
+    this.props.dispatch(clearOutcome());
+  }
+
+  componentDidMount() {
+    this.props.dispatch(fetchBoard(this.props.userId));
+  }
   
   render() {
     //let timePeriod = document.getElementById('ya');
@@ -38,29 +53,37 @@ componentDidMount() {
     const propsWithStandardDate = this.props.outcomes.map(outcome => {
       return Object.assign({}, outcome, {date: new Date(outcome.date)})
     });
-    
+
     //if range isn't set b/c user hasn't begun scrolling then set range to 1825 (i.e. the 5 year level)
     let range = this.props.range ? this.props.range : 1825;
+    //let rangeNum;
+    /*if(range == 1825) {
+      rangeNum = 'Next 5 Years';
+    } else if(range == 365) {
+      rangeNum = 'This Year';
+    } else if(range == 30) {
+      rangeNum = 'This Month';  
+    } else if(range == 7) {
+      rangeNum = 'This Week';
+    } else if(range == 1) {
+      rangeNum = 'Today';
+    }*/
+    
     return (
         <div>
+          <div className={this.props.showForm ? 'overlay' : null}></div>
           <header className="top-bar">
-            <HeaderBar />
-            <OutcomeForm selectedOutcome={this.props.selectedOutcome} range={range} userId={this.props.userId} />
-            <nav>
-              <ul className="time-nav">
-                <li className={range === 1825 ? "highlight-time-period" : null}>5 Year</li>
-                <li className={this.props.range === 365 ? "highlight-time-period" : null}>This Year</li>
-                <li className={this.props.range === 30 ? "highlight-time-period" : null}>This Month</li>
-                <li className={this.props.range === 7 ? "highlight-time-period" : null}>This Week</li>
-                <li className={this.props.range === 1 ? "highlight-time-period" : null}>Today</li>
-              </ul>
+            <nav className="main-nav">
+              <ScrollControl range={range} height={this.props.height} />
             </nav>
           </header>
-          <Years range={range} width={this.props.width} outcomes={propsWithStandardDate} startDate={this.props.startDate} endDate={this.props.endDate} />
-          <Year range={range} width={this.props.width} outcomes={propsWithStandardDate} />
-          <Month range={range} width={this.props.width} outcomes={propsWithStandardDate} />
-          <Week range={range} width={this.props.width} outcomes={propsWithStandardDate} />
-          <Today range={range} width={this.props.width} outcomes={propsWithStandardDate} />
+          <Years width={this.props.width} outcomes={propsWithStandardDate} startDate={this.props.startDate} endDate={this.props.endDate} />
+          <Year width={this.props.width} outcomes={propsWithStandardDate} />
+          <OutcomeForm selectedOutcome={this.props.selectedOutcome} range={range} userId={this.props.userId} editing={this.state.editing} setEditing={this.setEditing} />
+          <Month width={this.props.width} outcomes={propsWithStandardDate} />
+          <Week outcomes={propsWithStandardDate} />
+          <Today outcomes={propsWithStandardDate} />
+          <OutcomeButton setEditing={this.setEditing} />
         </div>
       );  
     }
@@ -68,7 +91,6 @@ componentDidMount() {
 }
 
 const mapStateToProps = state => {
-  console.log(`START DATE FROM DB ${state.auth.startDate}`)
   return { 
     email: state.auth.currentUser.email,
     outcomes: state.data.outcomes || [],
@@ -78,7 +100,9 @@ const mapStateToProps = state => {
     userId: state.auth.userId, 
     startDate: state.auth.startDate,
     endDate: state.auth.endDate,
-    width: state.data.screenWidthStore 
+    width: state.data.screenWidthStore, 
+    height: state.data.height,
+    showForm: state.data.showForm
   }
 };
 

@@ -1,17 +1,63 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './year.css';
 import YearCard from './year-card';
+import { getHeight } from '../actions';
+import { getRange } from '../actions'; 
 
 
-export default class Year extends React.Component {
- 
+export class Year extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myOneYearParentRef = React.createRef();
+  }
+
+
+  componentDidMount() {
+    const divHeight = this.myOneYearParentRef.current.clientHeight;
+    console.log(divHeight);
+    this.props.dispatch(getHeight(divHeight));
+   
+    /* IntersectionObserver API start */
+
+    window.addEventListener("load", function(event) {
+      let refedOneYearParentDiv = document.querySelector("#one-year-parent");
+      createObserver(refedOneYearParentDiv);
+    }, false);
+  
+    function createObserver(refedOneYearParentDiv) {
+      let observer;
+    
+      var options = {
+        root: null,
+        //rootMargin: "0px",
+        threshold: .9
+      };
+    
+      observer = new IntersectionObserver(callback, options);
+      observer.observe(refedOneYearParentDiv);
+    }
+    
+    var callback = (entries) => { 
+      entries.forEach(entry => {
+        if(entry.intersectionRatio > .8) {
+          console.log('1 year component in view here!')
+          const range = 365;
+          this.props.dispatch(getRange(range));
+        }
+        
+        
+      });
+    }; 
+
+  
+  }
+
+
   render() {
     /* the calc for positioning */
     const firstDayOfYear = new Date(new Date().getFullYear(), 0, 1);
-    const firstDayofYearRAW = new Date().getFullYear()
-    console.log(`FIRST DAY OF YEAR RAW: ${firstDayofYearRAW}`)
-    console.log(`FIRST DAY OF YEAR: ${firstDayOfYear}`)
-    const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31)
+    const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
     // number of days in between 
     const currentYearPeriod = Math.floor((lastDayOfYear - firstDayOfYear) / 86400000)
     //pixel width I have to work with (crossbrowswer)
@@ -35,19 +81,20 @@ export default class Year extends React.Component {
     });
 
     let startAndEndDates;
-    if(this.props.range === 365) {
+    /*if(this.props.range === 365) {
       startAndEndDates = <div>
         <span className="dates start-date">{firstDayOfYear.toDateString().slice(3)}</span>
         <span className="dates end-date">{lastDayOfYear.toDateString().slice(3)}</span>    
         </div>
-    } 
+    }*/ 
 
     return (
-      <div className={"one-year-parent " + (this.props.range === 365 ? "time-highlight" : null) }>
+      <div ref={this.myOneYearParentRef} id="one-year-parent" className={"one-year-parent " + (this.props.range === 365 ? "time-highlight" : null) }>
         {startAndEndDates}
-        <h2 className="year-header">This Year</h2>
         <div>{oneYearOutcomes}</div>
       </div>
     );
   }
 }
+
+export default connect()(Year);

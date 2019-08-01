@@ -1,6 +1,6 @@
 import React from 'react';
 import './years.css';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import YearCard from './year-card';
 import {getRange} from '../actions'; 
 
@@ -8,59 +8,50 @@ import {getRange} from '../actions';
 export class Years extends React.Component {
   constructor(props) {
     super(props);
-    this.handleScroll = this.handleScroll.bind(this);
-    this.state = {
-      styles: {}
-    }
+    this.myFiveYearParentRef = React.createRef();
   }
-  
-  /* ===== START Timeframe Logic =====  
-    1 - add a scroll eventListener that fires on scroll
-    2 - because timeframes have fixed heights all we have to do is 
-    determine how far the user has scrolled up or down the page using
-    window.scrollY and assign a day range (i.e. is the user making a
-    5 year outcome, 1 year outcome, 1 month outcome, etc.) for the 
-    outcome being designed
-    3 - we are doing this logic in the component instead of the action 
-    because the passing the scrollY number into the action and doing 
-    the logic there seems to make it choppy
-  */
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  };
+    window.addEventListener("load", function(event) {
+      const refedComponent = document.querySelector("#five-year-parent");
+      createObserver(refedComponent);
+    }, false);
   
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  };
-  
-  handleScroll(event) {
-    if(window.scrollY >= 0 && window.scrollY <= 215) {
-      const range = 1825;
-      console.log(window.scrollY);
-      this.props.dispatch(getRange(range)); //
-    } else if (window.scrollY >= 216 && window.scrollY <= 430) {
-      const range = 365;
-      this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 431 && window.scrollY <= 631) {
-      const range = 30;
-      this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 632 && window.scrollY <= 832) {
-      const range = 7;
-      this.props.dispatch(getRange(range));
-    } else if (window.scrollY >= 862) {
-      const range = 1;
-      this.props.dispatch(getRange(range));
+    function createObserver(refedComponent) {
+      let observer;
+    
+      const options = {
+        root: null,
+        //rootMargin: "0px",
+        threshold: .9
+      };
+    
+      observer = new IntersectionObserver(callback, options);
+      observer.observe(refedComponent);
     }
-  };
+    
+    var callback = (entries, observer) => { 
+      entries.forEach(entry => {
+        if(entry.intersectionRatio > .8) {
+          console.log('5 year component in view here!')
+          const range = 1825;
+          this.props.dispatch(getRange(range));
+        }
+        
+        
+      });
+    }; 
 
-  /* ===== END Timeframe Logic =====  */
+
+  }
   
+
+
+
   render() {
+    
     //5 year start
     const fiveYearStart = new Date(this.props.startDate);
-    console.log(`FIVE YEAR START RAW: ${this.props.startDate}`);
-    console.log(`FIVE YEAR START: ${fiveYearStart}`);
     //5 year end
     const fiveYearEnd = new Date(this.props.endDate)
     // number of days in between 
@@ -69,15 +60,11 @@ export class Years extends React.Component {
     const width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     //if the width of the screen changes then grab it from props and use it for the positioning calc
     const dynamicWidth = this.props.width !== undefined ? this.props.width : width;
-    console.log(width)
-    console.log(this.props.width)
-    
 
     const allOutcomes = this.props.outcomes
       .filter(outcome => outcome.date >= fiveYearStart && outcome.date <= fiveYearEnd && outcome.range === 1825)
       .map((outcome, index) => {
       //find # of days until the outcome is to be reached
-      console.log(`here's the date ${outcome.date} and teh ${outcome.whatText}`)
       const daysUntilOutcome1 = Math.round(Math.abs((outcome.date - fiveYearStart) / 86400000));
       //make a fraction to multiply the detected pixel count by
       const pixelFinderFractionX1 = daysUntilOutcome1/fiveYearPeriod;
@@ -88,22 +75,20 @@ export class Years extends React.Component {
       if(leftPositioning >= (width - 50)) {
         leftPositioning = width - 80;
       }
-      //console.log(leftPositioning1);
+      
       return <YearCard leftp={leftPositioning} outcomeInfo={outcome} key={index} />
     });
-
-    //console.log(`Outcomes for the 5YEAR ${allOutcomes}`);
-    
+   
     return (
-      <div className={"five-year-parent " + (this.props.range === 1825 ? "time-highlight" : null) }>
+      <div ref={this.myFiveYearParentRef} id="five-year-parent" className={"five-year-parent" /*+ (this.props.range === 1825 ? " time-highlight" : null)*/ }>
         <span className="dates start-date">{fiveYearStart.toDateString().slice(3)}</span>
         <span className="dates end-date">{fiveYearEnd.toDateString().slice(3)}</span>
-        <h2 className="year-header">Next 5 Years</h2>
         <div>{allOutcomes}</div>
       </div>
     );  
   }
 }
+
 
 export default connect()(Years); //because I want to dispatch things from 
 //the componnet, if I want to anything with redux I need to connect the

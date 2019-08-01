@@ -42,7 +42,6 @@ export const authError = error => ({
 // Stores the auth token in state and localStorage, and decodes and stores
 // the user data stored in the token
 const storeAuthInfo = (authToken, userId, startDate, endDate, dispatch) => {
-    console.log(`does startDate ${startDate} and endDate ${endDate} show?`);
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user, userId, startDate, endDate));

@@ -34,7 +34,8 @@ const initialState = {
       editing: false,
       showDetail: false 
     } */
-  ]
+  ],
+  showForm: false
 }; //leaving this here for future tinkering 
 
 export const reducer = (state=initialState, action) => {
@@ -53,16 +54,18 @@ export const reducer = (state=initialState, action) => {
   else if (action.type === actions.FETCH_BOARD_SUCCESS) {
     console.log(action);
     return Object.assign({}, state, {outcomes: action.outcomes}) 
-  } 
-  else if (action.type === actions.GET_RANGE) {
-    console.log('does this fire?')
+  } else if (action.type === actions.GET_RANGE) {
     return Object.assign({}, state, {range: action.yRange})
+  } else if (action.type === actions.GET_HEIGHT) {
+    return Object.assign({}, state, {height: action.height})
   } else if (action.type === actions.GET_OUTCOME) {
     return Object.assign({}, state, {outcome: action.outcome})
   } else if (action.type === actions.CLEAR_OUTCOME) {
     return Object.assign({}, state, {outcome: undefined})
   } else if (action.type === actions.SCREEN_WIDTH) {
     return Object.assign({}, state, {screenWidthStore: action.screenWidth})
+  } else if (action.type === actions.SHOW_FORM) {
+    return Object.assign({}, state, {showForm: action.showForm})
   }
   return state;
 };

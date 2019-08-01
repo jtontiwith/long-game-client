@@ -5,9 +5,8 @@
 
 .five-year-parent {
   position: relative;
-  height: 200px;
-  /*margin-bottom: 50px;*/
-  padding: 85px 10px 10px 10px;
+  background-color: #fff;
+  min-height:100vh;
 }
 
 .end-date {
@@ -37,3 +36,4 @@ and I will do it using the offset thing
 
 
 */
+

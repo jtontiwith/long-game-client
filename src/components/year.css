@@ -1,7 +1,7 @@
 .one-year-parent {
   position: relative;
-  height: 200px;
-  padding: 10px;
+  /*height: 200px;*/
+  min-height:100vh;
   background-color: #fff;
 }
 

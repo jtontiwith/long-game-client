@@ -1,8 +1,7 @@
 
 
 .one-week-parent {
-  height: 200px;
-  padding: 10px;
+  min-height:100vh;
   background-color: #fff;
   text-align: center;
   
@@ -17,7 +16,7 @@
 
 .day-wrapper div {
   text-decoration: underline;
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
   text-align: center;
 }
 

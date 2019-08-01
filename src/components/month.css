@@ -2,7 +2,6 @@
 
 .one-month-parent {
   position: relative;
-  height: 200px;
-  padding: 10px;
+  min-height:100vh;
   background-color: #fff;
 }

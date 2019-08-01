@@ -1,16 +1,66 @@
-header {
-  position: fixed;
-  background-color: #ffffff;
-  width: 100%;
-  z-index: 1;
-  height: 78px;
+.overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: block; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0; 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 1; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
 }
 
-@media only screen and (max-width: 474px) {
-  header {
-    height: 85px;
+.top-bar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  /*box-shadow: 1px 1px #d5cec5;*/
+  height: 45px;
+  background-color: #34495e;
+}
+
+.main-nav {
+  margin-top: 20px;
+}
+
+.timeline-shower {
+  font-weight: bold;
+  margin: 0;
+  padding-top: 2px;
+  text-align: right;
+  width: 580px;
+}
+
+
+
+/*
+.controls {
+  position: fixed;
+  right: 40px;
+  top: 150px;
+}*/
+
+
+
+
+@media only screen and (max-width: 780px) {
+  .timeline-shower {
+   display: none;
   }
- 
+
+  .main-nav {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    padding-top: 7px;
+  }
+
+  .top-bar {
+    display: block;
+    grid-template-columns: none;
+  }
+
 }
 
 

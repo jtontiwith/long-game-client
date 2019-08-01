@@ -1,9 +1,52 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './month.css';
-
 import YearCard from './year-card';
+import { getRange } from '../actions';
 
-export default class Month extends React.Component {
+
+
+export class Month extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myOneMonthParentRef = React.createRef();
+  }
+
+  componentDidMount() {
+    window.addEventListener("load", function(event) {
+      let refedOneMonthParendDiv = document.querySelector("#one-month-parent");
+      createObserver(refedOneMonthParendDiv);
+    }, false);
+  
+    function createObserver(refedOneMonthParendDiv) {
+      let observer;
+    
+      var options = {
+        root: null,
+        //rootMargin: "0px",
+        threshold: .9
+      };
+    
+      observer = new IntersectionObserver(callback, options);
+      observer.observe(refedOneMonthParendDiv);
+    }
+    
+    var callback = (entries, observer) => { 
+      entries.forEach(entry => {
+        if(entry.intersectionRatio > .8) {
+          console.log('1 month component in view here!')
+          const range = 30;
+          this.props.dispatch(getRange(range));
+        }
+        
+        
+      });
+    }; 
+
+
+  }
+  
+  
   render() {
     /* the calc for positioning */
     const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);   
@@ -32,20 +75,21 @@ export default class Month extends React.Component {
       });
       
       let startAndEndDates;
-      if(this.props.range === 30) {
+      /*if(this.props.range === 30) {
         startAndEndDates = <div>
           <span className="dates start-date">{firstDayOfMonth.toDateString().slice(3)}</span>
           <span className="dates end-date">{lastDayOfMonth.toDateString().slice(3)}</span>    
           </div>
-      }  
+      }*/  
       
     return(
-      <div className={"one-month-parent " + (this.props.range === 30 ? "time-highlight" : null) }>
+      <div ref={this.myOneMonthParentRef} id="one-month-parent" className={"one-month-parent " + (this.props.range === 30 ? "time-highlight" : null) }>
         {startAndEndDates}   
-        <h2 className="year-header">This Month</h2>
         <div>{oneMonthOutcomes}</div>
       </div>
     )
 
   }
 }
+
+export default connect()(Month)

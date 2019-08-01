@@ -1,0 +1,15 @@
+.outcome-button {
+  border-radius: 3px;
+  padding: 6px 15px 6px 15px;
+  background-color: #3498DB;
+  color: white; 
+  border: none;
+  vertical-align: top;
+  opacity: 0.75;
+  transition: 0.3s;
+  list-style: none; 
+  position: fixed;
+  top: 11px;
+  right: 30px;
+  z-index: 100;
+}

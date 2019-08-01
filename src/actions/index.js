@@ -13,10 +13,9 @@ export const addOutcome = (whatText, whyText, date, range, userId) => ({
   userId
 });
 
-//action to user is and set in montion visual cues
+//action to set in montion visual cues
 export const GET_RANGE = 'GET_RANGE';
 export const getRange = (yRange, rangeCss) => {
-  console.log(`YS ACTIONS ${yRange}`)
   return {
     type: GET_RANGE,
     yRange: yRange,
@@ -24,12 +23,22 @@ export const getRange = (yRange, rangeCss) => {
   };
 } 
 
+//action to get the height of timeline components
+export const GET_HEIGHT = 'GET_HEIGHT';
+export const getHeight = (height) => {
+  return {
+    type: GET_HEIGHT,
+    height
+  };
+} 
+
+
+
 //here we are just grabbing a single outcome from the DOM (not DB) so
 //that we can populate the OutcomeForm with it's values and then update
 //it, the logic of parsing the element is in the OutcomeForm itself
 export const GET_OUTCOME = 'GET_OUTCOME';
 export const getOutcome = (outcome) => {
-  console.log('Here is your outcome:' + outcome)
   return {
     type: GET_OUTCOME,
     outcome
@@ -39,7 +48,6 @@ export const getOutcome = (outcome) => {
 //clearing an outcome 
 export const CLEAR_OUTCOME = 'CLEAR_OUTCOME';
 export const clearOutcome = () => {
-  console.log('We are clearing an outcome!')
   return {
     type: CLEAR_OUTCOME
   }
@@ -55,9 +63,16 @@ export const screenWidth = (screenWidth) => {
   }
 }
 
+export const SHOW_FORM = 'SHOW_FORM';
+export const showForm = (showForm) => {
+  return {
+    type: SHOW_FORM,
+    showForm
+  }
+}
+
 //deleting an outcome
 export const deleteOutcome = (selectedId, userId) => dispatch => {
-  console.log('THIS THING RUNNING?')
   fetch(`${API_BASE_URL}/outcomes/${selectedId}`, {
     method: 'DELETE',
     headers: {
